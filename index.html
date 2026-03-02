@@ -62,6 +62,10 @@
   .ex-detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
   .ex-card.expanded .ex-detail-wrap{grid-template-rows:1fr}
   .ex-detail-inner{overflow:hidden}
+  .ex-vid{display:block;font-size:11px;color:#525252;text-decoration:none;margin:2px 0 6px 30px;transition:color .2s}
+  .ex-vid:hover{color:#a3a3a3}
+  .warmup-vid{color:#525252;text-decoration:none;font-size:10px;margin-left:8px;transition:color .2s}
+  .warmup-vid:hover{color:#a3a3a3}
   .cond-panel{background:#141414;border:1px solid #262626;border-radius:12px;padding:24px;display:none}
   .cond-panel h2{font-size:18px;font-weight:800;color:#f59e0b;margin:0 0 6px}
   .cond-grid{display:grid;gap:14px;margin-top:18px}
@@ -93,6 +97,7 @@
     .ex-name{font-size:16px}
     .ex-tags{margin-left:0}
     .ex-tip{padding-left:0;font-size:13px}
+    .ex-vid{margin-left:0}
     .warmup{font-size:13px;padding:12px 14px}
     .rules{padding:16px}
     .cond-panel{padding:16px}
@@ -212,10 +217,12 @@
     <h3 style="font-size:12px;color:#737373;margin-bottom:8px">DAILY COOLDOWN (Every Session)</h3>
     <div style="background:#1a1a1a;border-radius:8px;padding:14px;margin-bottom:8px">
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#e5e5e5">Dead Hangs</span><span class="tag tag-sets" style="font-size:11px">2–3 × 30–45s</span><span class="tag tag-meta" style="font-size:11px">Rest: 60s</span></div>
+      <a href="https://www.youtube.com/watch?v=DvJnmHynMfo" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
       <p style="font-size:12px;color:#737373;line-height:1.5">Decompress the spine after every session. Relax everything — shoulders, lats, hips. Grip work is a bonus.</p>
     </div>
     <div style="background:#1a1a1a;border:1px solid #f59e0b30;border-radius:8px;padding:14px;margin-bottom:8px">
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#f59e0b">Stomach Vacuums</span><span class="tag tag-sets" style="font-size:11px">3 × 20–30s holds</span><span class="tag tag-meta" style="font-size:11px">Rest: 30s</span></div>
+      <a href="https://www.youtube.com/watch?v=ODOHve6b8q8" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
       <p style="font-size:12px;color:#737373;line-height:1.5">Exhale all air, pull belly button to spine, hold. Trains the transverse abdominis — the internal corset that pulls your waist tight at rest. Do standing or on all fours.</p>
     </div>
     <h3 style="font-size:12px;font-weight:800;color:#dc2626;letter-spacing:1px;text-transform:uppercase;margin:14px 0 10px">APT CORRECTION (Every Session)</h3>
@@ -225,6 +232,7 @@
     </div>
     <div style="background:#1a1a1a;border:1px solid #dc262630;border-radius:8px;padding:14px">
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#e5e5e5">Dead Bugs</span><span class="tag tag-sets" style="font-size:11px">2 × 10/side</span><span class="tag tag-meta" style="font-size:11px">Tempo: Slow</span><span class="tag tag-meta" style="font-size:11px">Rest: 60s</span></div>
+      <a href="https://www.youtube.com/watch?v=eEhoSeBFoBk" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
       <p style="font-size:12px;color:#737373;line-height:1.5">Lie face-up, arms straight to ceiling, knees at 90°. Press lower back flat into the floor (posterior pelvic tilt). Extend opposite arm and leg while keeping the lower back glued to the ground. If your back arches off the floor, you've gone too far.</p>
     </div>
   </div>
@@ -241,6 +249,36 @@
     document.getElementById('panel-' + id).classList.add('active');
     document.getElementById('tab-' + id).classList.add('active-' + id);
   }
+
+  var videoMap = {
+    'Explosive Goblet Squats': 'https://www.youtube.com/watch?v=5Y3KW5rWMh4',
+    'Leg Press': 'https://www.youtube.com/watch?v=sEM_zo9w2ss',
+    'Incline Bench Press': 'https://www.youtube.com/watch?v=uIzbJX5EVIY',
+    'Weighted Chin-Ups': 'https://www.youtube.com/watch?v=-HV2bwkP6VU',
+    'Barbell Hip Thrusts': 'https://www.youtube.com/watch?v=lAnqN0J_p5A',
+    'Overhead Triceps Extensions + Incline DB Curls': 'https://www.youtube.com/watch?v=NRENeEgaIgA',
+    'Dumbbell Power Snatch': 'https://www.youtube.com/watch?v=3mlhF3dptAo',
+    'Standing Overhead Barbell Press': 'https://www.youtube.com/watch?v=j7ULT6dznNc',
+    'Chest-Supported DB Rows': 'https://www.youtube.com/watch?v=oKNjFM1bxAs',
+    'Weighted Dips (Upright)': 'https://www.youtube.com/watch?v=ZQnPQG5d67E',
+    'Strict Barbell Curls + Rope Pushdowns': 'https://www.youtube.com/watch?v=LzwgB15UdO8',
+    'Lateral Raises (Heavy Working Sets)': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
+    'Lu Raises (Heavy)': 'https://www.youtube.com/watch?v=mt3DP1n8gXE',
+    'L-Sit Progression Holds': 'https://www.youtube.com/watch?v=BbAkWxDZKIM',
+    'Speed Trap Bar Deadlifts': 'https://www.youtube.com/watch?v=-bSCG8ARHSk',
+    'Trap Bar Romanian Deadlift': 'https://www.youtube.com/watch?v=aD_zzsNrdqE',
+    'Flat Dumbbell Bench Press': 'https://www.youtube.com/watch?v=dGqI0Z5ul4k',
+    'Pull-Ups / Lat Pulldowns': 'https://www.youtube.com/watch?v=poyr8KenUfc',
+    'Hang High Pulls': 'https://www.youtube.com/watch?v=GZzESjLoJUM',
+    'Face Pulls': 'https://www.youtube.com/watch?v=7ZvpXA_mFpQ',
+    'Hammer Curls \u2192 Reverse Curls \u2192 Seated Calf Raises': 'https://www.youtube.com/watch?v=Yh5TXz99xwY'
+  };
+  var warmupVideoMap = {
+    'Wall Slides': 'https://www.youtube.com/watch?v=6Y3nRd9yd3M',
+    'Band Pull-Aparts': 'https://www.youtube.com/watch?v=nMB_zabRo74',
+    'Light Lateral Raises': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
+    'Cat-Cow': 'https://www.youtube.com/watch?v=y39PrKY_4JM'
+  };
 
   document.querySelectorAll('.ex-card').forEach(function(card) {
     var top = card.querySelector('.ex-top');
@@ -264,6 +302,19 @@
     tip.parentNode.insertBefore(wrap, tip);
     wrap.appendChild(inner);
     inner.appendChild(tip);
+
+    var exName = card.querySelector('.ex-name');
+    var vidUrl = exName && videoMap[exName.textContent.trim()];
+    if (vidUrl) {
+      var a = document.createElement('a');
+      a.className = 'ex-vid';
+      a.href = vidUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = '▶ Watch Tutorial';
+      a.addEventListener('click', function(e) { e.stopPropagation(); });
+      card.insertBefore(a, wrap);
+    }
 
     card.addEventListener('click', function() { card.classList.toggle('expanded'); });
   });
@@ -297,6 +348,17 @@
     bullets.forEach(function(b) {
       var li = document.createElement('li');
       li.textContent = b;
+      var wKey = Object.keys(warmupVideoMap).find(function(k){ return b.indexOf(k) === 0; });
+      if (wKey) {
+        var wa = document.createElement('a');
+        wa.className = 'warmup-vid';
+        wa.href = warmupVideoMap[wKey];
+        wa.target = '_blank';
+        wa.rel = 'noopener noreferrer';
+        wa.textContent = '▶';
+        wa.addEventListener('click', function(e) { e.stopPropagation(); });
+        li.appendChild(wa);
+      }
       ul.appendChild(li);
     });
     wInner.appendChild(ul);
