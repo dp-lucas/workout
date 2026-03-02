@@ -26,6 +26,17 @@
   .day-header .color-a{color:#dc2626} .day-header .color-b{color:#2563eb} .day-header .color-c{color:#059669}
   .warmup{margin-top:10px;background:#1a1a1a;border:1px solid #262626;border-radius:8px;padding:10px 14px;font-size:12px;color:#a3a3a3;line-height:1.6}
   .warmup span{font-weight:700}
+  .warmup{cursor:pointer;user-select:none;transition:background .2s}
+  .warmup:hover{background:#1f1f1f}
+  .warmup-label{display:flex;align-items:center}
+  .warmup-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#525252;transition:transform .25s ease,color .2s;padding-left:8px}
+  .warmup.expanded .warmup-arrow{transform:rotate(180deg);color:#737373}
+  .warmup-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+  .warmup.expanded .warmup-detail{grid-template-rows:1fr}
+  .warmup-inner{overflow:hidden}
+  .warmup-detail ul{list-style:none;padding:8px 0 0;margin:6px 0 0;border-top:1px solid #262626;display:grid;gap:5px}
+  .warmup-detail li{padding-left:14px;position:relative;font-size:12px;color:#a3a3a3;line-height:1.5}
+  .warmup-detail li::before{content:'•';position:absolute;left:0;color:#525252}
   .exercises{display:grid;gap:6px;margin-top:14px}
   .ex-card{background:#141414;border:1px solid #1f1f1f;border-radius:10px;padding:14px 16px;position:relative}
   .ex-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -255,6 +266,46 @@
     inner.appendChild(tip);
 
     card.addEventListener('click', function() { card.classList.toggle('expanded'); });
+  });
+
+  document.querySelectorAll('.warmup').forEach(function(warmup) {
+    var labelSpan = warmup.querySelector('span');
+    var isMobility = labelSpan.textContent.indexOf('MOBILITY') !== -1;
+
+    var contentText = '';
+    warmup.childNodes.forEach(function(node) {
+      if (node.nodeType === 3) contentText += node.textContent;
+    });
+    contentText = contentText.trim();
+
+    var bullets = contentText.split(isMobility ? ' \u2014 ' : ' + ')
+      .map(function(s){ return s.trim(); }).filter(Boolean);
+
+    var labelRow = document.createElement('div');
+    labelRow.className = 'warmup-label';
+    labelRow.appendChild(labelSpan.cloneNode(true));
+    var wArrow = document.createElement('span');
+    wArrow.className = 'warmup-arrow';
+    wArrow.textContent = '\u25be';
+    labelRow.appendChild(wArrow);
+
+    var detail = document.createElement('div');
+    detail.className = 'warmup-detail';
+    var wInner = document.createElement('div');
+    wInner.className = 'warmup-inner';
+    var ul = document.createElement('ul');
+    bullets.forEach(function(b) {
+      var li = document.createElement('li');
+      li.textContent = b;
+      ul.appendChild(li);
+    });
+    wInner.appendChild(ul);
+    detail.appendChild(wInner);
+
+    warmup.innerHTML = '';
+    warmup.appendChild(labelRow);
+    warmup.appendChild(detail);
+    warmup.addEventListener('click', function() { warmup.classList.toggle('expanded'); });
   });
 </script>
 </body>
