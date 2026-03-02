@@ -28,7 +28,7 @@
   .warmup span{font-weight:700}
   .exercises{display:grid;gap:6px;margin-top:14px}
   .ex-card{background:#141414;border:1px solid #1f1f1f;border-radius:10px;padding:14px 16px;position:relative}
-  .ex-top{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .ex-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .ex-num{font-size:12px;font-weight:800;min-width:20px}
   .num-a{color:#dc2626} .num-b{color:#2563eb} .num-c{color:#059669}
   .ex-slot{font-size:10px;color:#737373;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
@@ -37,7 +37,20 @@
   .tag{background:#1f1f1f;padding:4px 10px;border-radius:5px;font-size:12px}
   .tag-sets{color:#d4d4d4;font-weight:600}
   .tag-meta{color:#a3a3a3}
-  .ex-tip{font-size:12px;color:#737373;margin:0 0 0 30px;line-height:1.5}
+  .ex-tip{font-size:12px;color:#a3a3a3;line-height:1.6;padding:10px 0 4px 30px;border-top:1px solid #1f1f1f;margin-top:2px}
+  .ex-tip ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+  .ex-tip li{padding-left:16px;position:relative}
+  .ex-tip li::before{content:'•';position:absolute;left:0;color:#404040;line-height:1.6}
+  .ex-card{cursor:pointer;user-select:none;transition:border-color .2s}
+  .ex-card:hover{border-color:#2a2a2a}
+  .ex-card.expanded:has(.num-a){border-color:#dc262635}
+  .ex-card.expanded:has(.num-b){border-color:#2563eb35}
+  .ex-card.expanded:has(.num-c){border-color:#05966935}
+  .ex-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#404040;transition:transform .25s ease,color .2s;padding-left:8px}
+  .ex-card.expanded .ex-arrow{transform:rotate(180deg);color:#737373}
+  .ex-detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+  .ex-card.expanded .ex-detail-wrap{grid-template-rows:1fr}
+  .ex-detail-inner{overflow:hidden}
   .cond-panel{background:#141414;border:1px solid #262626;border-radius:12px;padding:24px;display:none}
   .cond-panel h2{font-size:18px;font-weight:800;color:#f59e0b;margin:0 0 6px}
   .cond-grid{display:grid;gap:14px;margin-top:18px}
@@ -68,7 +81,7 @@
     .ex-num{font-size:14px;font-weight:900}
     .ex-name{font-size:16px}
     .ex-tags{margin-left:0}
-    .ex-tip{margin-left:0;font-size:13px}
+    .ex-tip{padding-left:0;font-size:13px}
     .warmup{font-size:13px;padding:12px 14px}
     .rules{padding:16px}
     .cond-panel{padding:16px}
@@ -217,6 +230,32 @@
     document.getElementById('panel-' + id).classList.add('active');
     document.getElementById('tab-' + id).classList.add('active-' + id);
   }
+
+  document.querySelectorAll('.ex-card').forEach(function(card) {
+    var top = card.querySelector('.ex-top');
+    var arrow = document.createElement('span');
+    arrow.className = 'ex-arrow';
+    arrow.textContent = '▾';
+    top.appendChild(arrow);
+
+    var tip = card.querySelector('.ex-tip');
+    if (!tip) return;
+    var raw = tip.textContent.trim().replace('Rev. Curls', 'Reverse Curls');
+    var bullets = raw.split(/\s*\|\s*|\.\s+/)
+      .map(function(s){ return s.replace(/\.$/, '').trim(); })
+      .filter(Boolean);
+    tip.innerHTML = '<ul>' + bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'ex-detail-wrap';
+    var inner = document.createElement('div');
+    inner.className = 'ex-detail-inner';
+    tip.parentNode.insertBefore(wrap, tip);
+    wrap.appendChild(inner);
+    inner.appendChild(tip);
+
+    card.addEventListener('click', function() { card.classList.toggle('expanded'); });
+  });
 </script>
 </body>
 </html>
