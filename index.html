@@ -20,7 +20,7 @@
   .tab.active-a{border-color:#dc2626;background:#dc262618;color:#fff}
   .tab.active-b{border-color:#2563eb;background:#2563eb18;color:#fff}
   .tab.active-c{border-color:#059669;background:#05966918;color:#fff}
-  .tab.active-cond{border-color:#f59e0b;background:#f59e0b18;color:#fff}
+
   .day-header h2{font-size:18px;font-weight:800;margin:0 0 2px}
   .day-header p{font-size:13px;color:#737373;margin:0}
   .day-header .color-a{color:#dc2626} .day-header .color-b{color:#2563eb} .day-header .color-c{color:#059669}
@@ -66,17 +66,6 @@
   .ex-vid:hover{color:#a3a3a3}
   .warmup-vid{color:#525252;text-decoration:none;font-size:10px;margin-left:8px;transition:color .2s}
   .warmup-vid:hover{color:#a3a3a3}
-  .cond-panel{background:#141414;border:1px solid #262626;border-radius:12px;padding:24px;display:none}
-  .cond-panel h2{font-size:18px;font-weight:800;color:#f59e0b;margin:0 0 6px}
-  .cond-grid{display:grid;gap:14px;margin-top:18px}
-  .cond-box{background:#1a1a1a;border-radius:8px;padding:16px}
-  .cond-label{font-size:11px;color:#f59e0b;font-weight:700;text-transform:uppercase;letter-spacing:1px}
-  .cond-val{margin:6px 0 0;font-size:16px;font-weight:700;color:#fff}
-  .cond-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .cond-sm-label{font-size:11px;color:#737373;font-weight:600}
-  .cond-sm-val{margin:4px 0 0;font-size:14px;color:#e5e5e5}
-  .cond-note{background:#f59e0b10;border:1px solid #f59e0b30;border-radius:8px;padding:14px}
-  .cond-note p{margin:0;font-size:13px;color:#d4a053;line-height:1.6}
   .rules{margin-top:24px;background:#141414;border:1px solid #262626;border-radius:12px;padding:20px}
   .rules h3{font-size:14px;font-weight:800;color:#fff;margin:0 0 14px;letter-spacing:1px;text-transform:uppercase}
   .rules-grid{display:grid;gap:10px}
@@ -114,7 +103,6 @@
     <button class="tab active-a" id="tab-a" onclick="show('a')">DAY A</button>
     <button class="tab" id="tab-b" onclick="show('b')">DAY B</button>
     <button class="tab" id="tab-c" onclick="show('c')">DAY C</button>
-    <button class="tab" id="tab-cond" onclick="show('cond')">SPRINT</button>
   </div>
 
   <div id="content">
@@ -174,20 +162,6 @@
       </div>
     </div>
 
-    <!-- CONDITIONING -->
-    <div class="panel" id="panel-cond">
-      <div class="cond-panel" style="display:block">
-        <h2>CONDITIONING: Sprint Session (1x per week, off-day)</h2>
-        <div class="cond-grid">
-          <div class="cond-box"><span class="cond-label">Protocol</span><p class="cond-val">6–8 rounds: 10s ALL-OUT sprint → 50s easy recovery</p></div>
-          <div class="cond-row">
-            <div class="cond-box"><span class="cond-sm-label">Equipment</span><p class="cond-sm-val">Assault Bike, Rower, or Hill Sprints</p></div>
-            <div class="cond-box"><span class="cond-sm-label">Total Time</span><p class="cond-sm-val">Under 10 minutes</p></div>
-          </div>
-          <div class="cond-note"><p>Alactic capacity work — same energy system as your explosive primers. Drives leanness, improves recovery between sets on lifting days, and builds the hard athletic look at rest.</p></div>
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -198,7 +172,7 @@
       <div class="rule"><span class="rule-num">1.</span><p><span>Toned at Rest: </span>Heavy loads + explosive lifting = high myogenic tone. Muscles stay hard even when relaxed.</p></div>
       <div class="rule"><span class="rule-num">2.</span><p><span>The V-Taper: </span>Built by lats & delts, revealed by leanness. Prioritize pulls equal to pushes.</p></div>
       <div class="rule"><span class="rule-num">3.</span><p><span>Density over Pump: </span>Straight heavy sets, no drop sets. Chase neural adaptations, not the pump.</p></div>
-      <div class="rule"><span class="rule-num">4.</span><p><span>Conditioning = The Look: </span>One sprint session per week accelerates leanness more than any extra gym set.</p></div>
+      <div class="rule"><span class="rule-num">4.</span><p><span>Conditioning = The Look: </span>Cardio done separately — leanness is built outside the weight room.</p></div>
       <div class="rule"><span class="rule-num">5.</span><p><span>Tempo Key: </span>Eccentric – Pause Bottom – Concentric – Pause Top (e.g., 3-1-1-0). X = Explosive.</p></div>
     </div>
   </div>
@@ -226,11 +200,11 @@
       <p style="font-size:12px;color:#737373;line-height:1.5">Lie face-up, arms straight to ceiling, knees at 90°. Press lower back flat into the floor (posterior pelvic tilt). Extend opposite arm and leg while keeping the lower back glued to the ground. If your back arches off the floor, you've gone too far.</p>
     </div>
   </div>
-  <p class="footer">3 Lifting Days + 1 Sprint Day — Built for the tall, lean, athletic look.</p>
+  <p class="footer">3 Lifting Days — Built for the tall, lean, athletic look.</p>
 </div>
 
 <script>
-  const panels = ['a','b','c','cond'];
+  const panels = ['a','b','c'];
   function show(id) {
     panels.forEach(p => {
       document.getElementById('panel-' + p).classList.remove('active');
