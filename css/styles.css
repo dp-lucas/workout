@@ -1,40 +1,42 @@
 /* ══════════════════════════════════════════════════════
-   Apple HIG Dark Mode — iOS 18 Design System
+   iOS 26 — Liquid Glass Design System
    ══════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Background Hierarchy ── */
-  --bg-primary: #000000;
-  --bg-secondary: #1C1C1E;
-  --bg-tertiary: #2C2C2E;
-  --bg-elevated: #3A3A3C;
+  /* ── Background ── */
+  --bg: #000000;
 
-  /* ── Labels ── */
+  /* ── Liquid Glass Materials ── */
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  --glass-active: rgba(255, 255, 255, 0.06);
+  --glass-elevated: rgba(255, 255, 255, 0.10);
+  --glass-frosted: rgba(255, 255, 255, 0.05);
+  --glass-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
+  --glass-blur: blur(20px) saturate(180%);
+
+  /* ── Labels (unchanged from Apple HIG) ── */
   --label: #FFFFFF;
   --label-secondary: rgba(235, 235, 245, 0.60);
   --label-tertiary: rgba(235, 235, 245, 0.30);
-  --label-quaternary: rgba(235, 235, 245, 0.18);
-
-  /* ── Fills ── */
-  --fill: rgba(120, 120, 128, 0.36);
-  --fill-secondary: rgba(120, 120, 128, 0.32);
-  --fill-tertiary: rgba(118, 118, 128, 0.24);
+  --label-quaternary: rgba(235, 235, 245, 0.16);
 
   /* ── Separators ── */
-  --separator: rgba(84, 84, 88, 0.65);
-  --separator-opaque: #38383A;
+  --separator: rgba(255, 255, 255, 0.08);
 
   /* ── System Accents ── */
   --tint-red: #FF453A;
   --tint-blue: #0A84FF;
   --tint-green: #30D158;
   --tint-orange: #FF9F0A;
-  --tint-gray: #8E8E93;
 
-  /* ── Layout ── */
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
+  /* ── Layout (more rounded for iOS 26) ── */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
   --spacing: 16px;
   --min-touch: 44px;
 
@@ -56,11 +58,11 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: var(--bg-primary);
+  background: var(--bg);
   color: var(--label);
   min-height: 100dvh;
   min-height: 100vh;
-  padding: calc(env(safe-area-inset-top, 0px) + 16px) var(--spacing) calc(env(safe-area-inset-bottom, 0px) + 16px);
+  padding: calc(env(safe-area-inset-top, 0px) + 20px) var(--spacing) calc(env(safe-area-inset-bottom, 0px) + 20px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -69,12 +71,9 @@ body {
 }
 
 /* ── Wrapper ── */
-.wrap {
-  max-width: 428px;
-  margin: 0 auto;
-}
+.wrap { max-width: 428px; margin: 0 auto; }
 
-/* ── Typography — Apple HIG Text Styles ── */
+/* ── Typography ── */
 h1 {
   font-size: 28px;
   font-weight: 700;
@@ -88,7 +87,7 @@ h1 {
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
-  letter-spacing: 0.07px;
+  letter-spacing: 0.5px;
   color: var(--label-tertiary);
   text-transform: uppercase;
   text-align: center;
@@ -99,22 +98,37 @@ h1 {
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
-  letter-spacing: -0.08px;
   color: var(--label-secondary);
   text-align: center;
   margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════════════════
+   Liquid Glass Mixin — shared surface treatment
+   ══════════════════════════════════════════════════════ */
+
+.week-day,
+.ex-card,
+.warmup,
+.rules,
+.cooldown-inner,
+.sm-tag {
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--glass-inner-glow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
 /* ── Weekly Schedule Grid ── */
 .week-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin: 20px 0 12px;
+  gap: 6px;
+  margin: 20px 0 16px;
 }
 
 .week-day {
-  background: var(--bg-secondary);
   border-radius: var(--radius-sm);
   padding: 10px 4px;
   text-align: center;
@@ -140,14 +154,20 @@ h1 {
 .week-day .wd-type.type-run { color: var(--tint-orange); }
 .week-day .wd-type.type-rest { color: var(--tint-green); }
 
-/* ── Segmented Control (Tabs) ── */
+/* ══════════════════════════════════════════════════════
+   Floating Pill Tab Bar — iOS 26 style
+   ══════════════════════════════════════════════════════ */
 .tabs {
   display: flex;
-  background: var(--fill-tertiary);
-  border-radius: 9px;
-  padding: 2px;
-  margin: 0 0 16px;
-  height: 36px;
+  background: var(--glass-frosted);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  margin: 0 0 20px;
+  height: 42px;
 }
 
 .tab {
@@ -157,24 +177,28 @@ h1 {
   justify-content: center;
   border: none;
   background: transparent;
-  color: var(--label-secondary);
+  color: var(--label-tertiary);
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 7px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: all 0.2s var(--ease-spring);
+  transition: all 0.3s var(--ease-spring);
   min-height: var(--min-touch);
   -webkit-user-select: none;
   user-select: none;
+  position: relative;
 }
 
-.tab:active { transform: scale(0.97); }
+.tab:active { transform: scale(0.95); }
 
-.tab.active-a, .tab.active-b, .tab.active-c, .tab.active-r {
-  background: var(--bg-tertiary);
+.tab.active-a,
+.tab.active-b,
+.tab.active-c,
+.tab.active-r {
+  background: rgba(255, 255, 255, 0.14);
   color: var(--label);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* ── Panels ── */
@@ -183,10 +207,10 @@ h1 {
 
 /* ── Day Header ── */
 .day-header h2 {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 25px;
-  letter-spacing: 0.38px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.35px;
   margin: 0 0 2px;
 }
 
@@ -206,15 +230,14 @@ h1 {
 /* ── Session Meta Tags ── */
 .session-meta {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-top: 10px;
   flex-wrap: wrap;
 }
 
 .session-meta .sm-tag {
-  background: var(--bg-secondary);
-  border-radius: 6px;
-  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
   font-size: 12px;
   font-weight: 500;
   color: var(--label-tertiary);
@@ -222,23 +245,24 @@ h1 {
 
 .session-meta .sm-tag strong { color: var(--label-secondary); }
 
-/* ── Warmup / Mobility Blocks ── */
+/* ══════════════════════════════════════════════════════
+   Warmup / Mobility — Glass disclosure groups
+   ══════════════════════════════════════════════════════ */
 .warmup {
   margin-top: 10px;
-  background: var(--bg-secondary);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
+  padding: 14px 16px;
   font-size: 13px;
   line-height: 18px;
   color: var(--label-secondary);
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
-  transition: background 0.2s var(--ease-spring);
+  transition: background 0.25s var(--ease-spring);
 }
 
 .warmup span { font-weight: 600; }
-.warmup:active { background: var(--bg-tertiary); }
+.warmup:active { background: var(--glass-active); }
 
 .warmup-label { display: flex; align-items: center; }
 
@@ -247,7 +271,7 @@ h1 {
   flex-shrink: 0;
   font-size: 10px;
   color: var(--label-tertiary);
-  transition: transform 0.3s var(--ease-spring), color 0.2s;
+  transition: transform 0.35s var(--ease-spring), color 0.2s;
   padding-left: 8px;
 }
 
@@ -256,7 +280,7 @@ h1 {
 .warmup-detail {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s var(--ease-spring);
+  transition: grid-template-rows 0.35s var(--ease-spring);
 }
 
 .warmup.expanded .warmup-detail { grid-template-rows: 1fr; }
@@ -265,7 +289,7 @@ h1 {
 .warmup-detail ul {
   list-style: none;
   padding: 10px 0 0;
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   border-top: 0.5px solid var(--separator);
   display: grid;
   gap: 6px;
@@ -279,24 +303,21 @@ h1 {
   line-height: 18px;
 }
 
-.warmup-detail li::before {
-  content: '\2022';
-  position: absolute;
-  left: 0;
-  color: var(--label-tertiary);
-}
+.warmup-detail li::before { content: '\2022'; position: absolute; left: 0; color: var(--label-tertiary); }
 
 .warmup-vid {
-  color: var(--label-tertiary);
+  color: var(--tint-blue);
   text-decoration: none;
-  font-size: 10px;
+  font-size: 11px;
   margin-left: 6px;
-  transition: color 0.2s;
+  transition: opacity 0.2s;
 }
 
-.warmup-vid:active { color: var(--label-secondary); }
+.warmup-vid:active { opacity: 0.5; }
 
-/* ── Exercise Cards ── */
+/* ══════════════════════════════════════════════════════
+   Exercise Cards — Liquid Glass
+   ══════════════════════════════════════════════════════ */
 .exercises {
   display: grid;
   gap: 8px;
@@ -304,18 +325,17 @@ h1 {
 }
 
 .ex-card {
-  background: var(--bg-secondary);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 16px;
   position: relative;
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
-  transition: background 0.2s var(--ease-spring);
+  transition: background 0.25s var(--ease-spring), transform 0.15s var(--ease-spring);
   contain: layout style;
 }
 
-.ex-card:active { background: var(--bg-tertiary); }
+.ex-card:active { background: var(--glass-active); transform: scale(0.985); }
 
 .ex-top {
   display: flex;
@@ -325,9 +345,9 @@ h1 {
 }
 
 .ex-num {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
-  min-width: 22px;
+  min-width: 24px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -358,13 +378,14 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin: 6px 0 0 32px;
+  margin: 8px 0 0 34px;
 }
 
 .tag {
-  background: var(--bg-tertiary);
-  padding: 4px 10px;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
   line-height: 16px;
 }
@@ -383,7 +404,7 @@ h1 {
   flex-shrink: 0;
   font-size: 10px;
   color: var(--label-quaternary);
-  transition: transform 0.3s var(--ease-spring), color 0.2s;
+  transition: transform 0.35s var(--ease-spring), color 0.2s;
   padding-left: 8px;
 }
 
@@ -392,7 +413,7 @@ h1 {
 .ex-detail-wrap {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s var(--ease-spring);
+  transition: grid-template-rows 0.35s var(--ease-spring);
 }
 
 .ex-card.expanded .ex-detail-wrap { grid-template-rows: 1fr; }
@@ -403,19 +424,12 @@ h1 {
   line-height: 20px;
   letter-spacing: -0.24px;
   color: var(--label-secondary);
-  padding: 12px 0 4px 32px;
+  padding: 12px 0 4px 34px;
   border-top: 0.5px solid var(--separator);
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
-.ex-tip ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 8px;
-}
-
+.ex-tip ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .ex-tip li { padding-left: 16px; position: relative; }
 .ex-tip li::before { content: '\2022'; position: absolute; left: 0; color: var(--label-tertiary); line-height: 20px; }
 
@@ -425,16 +439,17 @@ h1 {
   font-weight: 500;
   color: var(--tint-blue);
   text-decoration: none;
-  margin: 4px 0 6px 32px;
+  margin: 4px 0 6px 34px;
   transition: opacity 0.2s;
 }
 
-.ex-vid:active { opacity: 0.6; }
+.ex-vid:active { opacity: 0.5; }
 
-/* ── Rules / Protocol Blocks ── */
+/* ══════════════════════════════════════════════════════
+   Rules / Protocol Blocks — Frosted Glass
+   ══════════════════════════════════════════════════════ */
 .rules {
-  margin-top: 20px;
-  background: var(--bg-secondary);
+  margin-top: 16px;
   border-radius: var(--radius-md);
   padding: 16px;
 }
@@ -444,23 +459,19 @@ h1 {
   font-weight: 600;
   color: var(--label-secondary);
   margin: 0 0 12px;
-  letter-spacing: -0.08px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .rules-grid { display: grid; gap: 10px; }
 
-.rule {
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-}
+.rule { display: flex; gap: 10px; align-items: baseline; }
 
 .rule-num {
   font-size: 12px;
   font-weight: 700;
   color: var(--label-tertiary);
-  min-width: 18px;
+  min-width: 20px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -472,77 +483,51 @@ h1 {
   color: var(--label-secondary);
 }
 
-.rule span {
-  color: var(--label);
-  font-weight: 600;
+.rule span { color: var(--label); font-weight: 600; }
+
+/* ── Cooldown Block ── */
+.cooldown-inner {
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  background: var(--glass-elevated);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--glass-inner-glow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
+
+.cooldown-header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.cooldown-name { font-size: 17px; font-weight: 600; line-height: 22px; color: var(--label); }
+.cooldown-vid { display: block; font-size: 13px; font-weight: 500; color: var(--tint-blue); text-decoration: none; margin: 4px 0 6px; transition: opacity 0.2s; }
+.cooldown-vid:active { opacity: 0.5; }
+.cooldown-desc { font-size: 13px; line-height: 18px; color: var(--label-tertiary); }
 
 /* ── Footer ── */
 .footer {
   text-align: center;
   font-size: 12px;
   color: var(--label-quaternary);
-  margin-top: 24px;
+  margin-top: 28px;
   padding-bottom: 20px;
 }
 
-/* ── Cooldown Block ── */
-.cooldown-inner {
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-}
-
-.cooldown-header {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.cooldown-name {
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 22px;
-  color: var(--label);
-}
-
-.cooldown-vid {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--tint-blue);
-  text-decoration: none;
-  margin: 4px 0 6px;
-  transition: opacity 0.2s;
-}
-
-.cooldown-vid:active { opacity: 0.6; }
-
-.cooldown-desc {
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--label-tertiary);
-}
-
-/* ── Mobile (already mobile-first, but fine-tune) ── */
+/* ══════════════════════════════════════════════════════
+   Mobile — fine-tune for small screens
+   ══════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
   body { padding-left: 14px; padding-right: 14px; }
   .exercises { gap: 8px; }
-  .ex-card { padding: 16px; border-radius: var(--radius-lg); }
-  .ex-num { font-size: 14px; }
-  .ex-name { font-size: 17px; }
+  .ex-card { padding: 16px; }
   .ex-tags { margin-left: 0; }
   .ex-tip { padding-left: 0; }
   .ex-vid { margin-left: 0; }
   .warmup { padding: 14px 16px; }
-  .week-grid { gap: 3px; }
+  .week-grid { gap: 4px; }
   .week-day { padding: 8px 3px; }
   .week-day .wd-label { font-size: 9px; }
   .week-day .wd-type { font-size: 11px; }
 }
 
-/* ── Large screens — constrain width ── */
 @media (min-width: 600px) {
   body { padding-left: 20px; padding-right: 20px; }
 }
