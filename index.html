@@ -189,6 +189,15 @@
     </div>
   </div>
 
+  <div class="rules" style="margin-top:14px">
+    <h3 style="color:var(--label-tertiary)">Weight Log Data</h3>
+    <div class="data-actions">
+      <button class="data-btn" onclick="exportWeights()">Export JSON</button>
+      <button class="data-btn" onclick="document.getElementById('import-file').click()">Import JSON</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importWeights(this)">
+    </div>
+  </div>
+
   <p class="footer">3 Lifting Days + 3 Running Days + 1 Rest Day</p>
 </div>
 

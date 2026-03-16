@@ -443,12 +443,104 @@ h1 {
   padding-bottom: 20px;
 }
 
+/* ══════════════════════════════════════════════════════
+   Weight Tracking
+   ══════════════════════════════════════════════════════ */
+.weight-log {
+  margin: 10px 0 0 34px;
+}
+
+.weight-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.weight-part-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--label-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin: 6px 0 4px;
+}
+
+.weight-part-label:first-child { margin-top: 0; }
+
+.weight-set {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-raised);
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+
+.weight-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--label-tertiary);
+  min-width: 16px;
+}
+
+.weight-input {
+  width: 50px;
+  height: 32px;
+  background: var(--surface-active);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--label);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  text-align: center;
+  padding: 0 2px;
+  -moz-appearance: textfield;
+}
+
+.weight-input::-webkit-outer-spin-button,
+.weight-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.weight-input:focus { outline: none; border-color: var(--tint-blue); }
+.weight-input::placeholder { color: var(--label-quaternary); }
+
+.weight-unit {
+  font-size: 11px;
+  color: var(--label-tertiary);
+}
+
+.weight-date {
+  font-size: 11px;
+  color: var(--label-quaternary);
+  margin-top: 4px;
+}
+
+/* ── Data Buttons ── */
+.data-actions { display: flex; gap: 8px; }
+
+.data-btn {
+  flex: 1;
+  height: 40px;
+  background: var(--surface-raised);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--label-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.data-btn:active { background: var(--surface-active); }
+
 /* ── Mobile ── */
 @media (max-width: 600px) {
   body { padding-left: 14px; padding-right: 14px; }
   .ex-tags { margin-left: 0; }
   .ex-tip { padding-left: 0; }
   .ex-vid { margin-left: 0; }
+  .weight-log { margin-left: 0; }
 }
 
 @media (min-width: 600px) {
