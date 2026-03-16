@@ -1,30 +1,22 @@
 /* ══════════════════════════════════════════════════════
-   iOS 26 — Liquid Glass Design System
+   iOS 26 — Clean Dark · Rounded · Native Feel
    ══════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Background ── */
+  /* ── Surfaces (solid, no glass) ── */
   --bg: #000000;
+  --surface: #1C1C1E;
+  --surface-raised: #2C2C2E;
+  --surface-active: #3A3A3C;
 
-  /* ── Liquid Glass Materials ── */
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-hover: rgba(255, 255, 255, 0.12);
-  --glass-active: rgba(255, 255, 255, 0.06);
-  --glass-elevated: rgba(255, 255, 255, 0.10);
-  --glass-frosted: rgba(255, 255, 255, 0.05);
-  --glass-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
-  --glass-blur: blur(20px) saturate(180%);
-
-  /* ── Labels (unchanged from Apple HIG) ── */
+  /* ── Labels ── */
   --label: #FFFFFF;
   --label-secondary: rgba(235, 235, 245, 0.60);
   --label-tertiary: rgba(235, 235, 245, 0.30);
   --label-quaternary: rgba(235, 235, 245, 0.16);
 
   /* ── Separators ── */
-  --separator: rgba(255, 255, 255, 0.08);
+  --separator: rgba(84, 84, 88, 0.36);
 
   /* ── System Accents ── */
   --tint-red: #FF453A;
@@ -32,7 +24,7 @@
   --tint-green: #30D158;
   --tint-orange: #FF9F0A;
 
-  /* ── Layout (more rounded for iOS 26) ── */
+  /* ── Layout ── */
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
@@ -42,10 +34,9 @@
 
   /* ── Animation ── */
   --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1.0);
-  --ease-interactive: cubic-bezier(0.23, 1.0, 0.32, 1.0);
 }
 
-/* ── Reset & Base ── */
+/* ── Reset ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -70,7 +61,6 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* ── Wrapper ── */
 .wrap { max-width: 428px; margin: 0 auto; }
 
 /* ── Typography ── */
@@ -79,14 +69,12 @@ h1 {
   font-weight: 700;
   line-height: 34px;
   letter-spacing: 0.36px;
-  color: var(--label);
   text-align: center;
 }
 
 .sub {
   font-size: 11px;
   font-weight: 500;
-  line-height: 13px;
   letter-spacing: 0.5px;
   color: var(--label-tertiary);
   text-transform: uppercase;
@@ -96,7 +84,6 @@ h1 {
 
 .desc {
   font-size: 13px;
-  font-weight: 400;
   line-height: 18px;
   color: var(--label-secondary);
   text-align: center;
@@ -104,70 +91,15 @@ h1 {
 }
 
 /* ══════════════════════════════════════════════════════
-   Liquid Glass Mixin — shared surface treatment
-   ══════════════════════════════════════════════════════ */
-
-.week-day,
-.ex-card,
-.warmup,
-.rules,
-.cooldown-inner,
-.sm-tag {
-  background: var(--glass);
-  border: 0.5px solid var(--glass-border);
-  box-shadow: var(--glass-inner-glow);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-}
-
-/* ── Weekly Schedule Grid ── */
-.week-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  margin: 20px 0 16px;
-}
-
-.week-day {
-  border-radius: var(--radius-sm);
-  padding: 10px 4px;
-  text-align: center;
-}
-
-.week-day .wd-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--label-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.week-day .wd-type {
-  font-size: 12px;
-  font-weight: 700;
-  margin-top: 3px;
-}
-
-.week-day .wd-type.type-a { color: var(--tint-red); }
-.week-day .wd-type.type-b { color: var(--tint-blue); }
-.week-day .wd-type.type-c { color: var(--tint-green); }
-.week-day .wd-type.type-run { color: var(--tint-orange); }
-.week-day .wd-type.type-rest { color: var(--tint-green); }
-
-/* ══════════════════════════════════════════════════════
-   Floating Pill Tab Bar — iOS 26 style
+   Floating Pill Tab Bar
    ══════════════════════════════════════════════════════ */
 .tabs {
   display: flex;
-  background: var(--glass-frosted);
-  border: 0.5px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  background: var(--surface);
   border-radius: var(--radius-pill);
   padding: 3px;
-  margin: 0 0 20px;
-  height: 42px;
+  margin: 20px 0;
+  height: 44px;
 }
 
 .tab {
@@ -179,7 +111,7 @@ h1 {
   background: transparent;
   color: var(--label-tertiary);
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -187,7 +119,6 @@ h1 {
   min-height: var(--min-touch);
   -webkit-user-select: none;
   user-select: none;
-  position: relative;
 }
 
 .tab:active { transform: scale(0.95); }
@@ -196,9 +127,8 @@ h1 {
 .tab.active-b,
 .tab.active-c,
 .tab.active-r {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--surface-raised);
   color: var(--label);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* ── Panels ── */
@@ -210,13 +140,11 @@ h1 {
   font-size: 22px;
   font-weight: 700;
   line-height: 28px;
-  letter-spacing: 0.35px;
   margin: 0 0 2px;
 }
 
 .day-header p {
   font-size: 13px;
-  font-weight: 400;
   line-height: 18px;
   color: var(--label-secondary);
   margin: 0;
@@ -236,6 +164,7 @@ h1 {
 }
 
 .session-meta .sm-tag {
+  background: var(--surface);
   border-radius: var(--radius-pill);
   padding: 5px 12px;
   font-size: 12px;
@@ -246,10 +175,11 @@ h1 {
 .session-meta .sm-tag strong { color: var(--label-secondary); }
 
 /* ══════════════════════════════════════════════════════
-   Warmup / Mobility — Glass disclosure groups
+   Warmup / Mobility Blocks
    ══════════════════════════════════════════════════════ */
 .warmup {
   margin-top: 10px;
+  background: var(--surface);
   border-radius: var(--radius-md);
   padding: 14px 16px;
   font-size: 13px;
@@ -258,24 +188,23 @@ h1 {
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
-  transition: background 0.25s var(--ease-spring);
+  transition: background 0.2s var(--ease-spring);
 }
 
 .warmup span { font-weight: 600; }
-.warmup:active { background: var(--glass-active); }
+.warmup:active { background: var(--surface-raised); }
 
 .warmup-label { display: flex; align-items: center; }
 
 .warmup-arrow {
   margin-left: auto;
-  flex-shrink: 0;
   font-size: 10px;
   color: var(--label-tertiary);
-  transition: transform 0.35s var(--ease-spring), color 0.2s;
+  transition: transform 0.35s var(--ease-spring);
   padding-left: 8px;
 }
 
-.warmup.expanded .warmup-arrow { transform: rotate(180deg); color: var(--label-secondary); }
+.warmup.expanded .warmup-arrow { transform: rotate(180deg); }
 
 .warmup-detail {
   display: grid;
@@ -310,13 +239,12 @@ h1 {
   text-decoration: none;
   font-size: 11px;
   margin-left: 6px;
-  transition: opacity 0.2s;
 }
 
 .warmup-vid:active { opacity: 0.5; }
 
 /* ══════════════════════════════════════════════════════
-   Exercise Cards — Liquid Glass
+   Exercise Cards
    ══════════════════════════════════════════════════════ */
 .exercises {
   display: grid;
@@ -325,17 +253,17 @@ h1 {
 }
 
 .ex-card {
+  background: var(--surface);
   border-radius: var(--radius-md);
   padding: 16px;
-  position: relative;
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
-  transition: background 0.25s var(--ease-spring), transform 0.15s var(--ease-spring);
+  transition: background 0.2s var(--ease-spring), transform 0.15s var(--ease-spring);
   contain: layout style;
 }
 
-.ex-card:active { background: var(--glass-active); transform: scale(0.985); }
+.ex-card:active { background: var(--surface-raised); transform: scale(0.985); }
 
 .ex-top {
   display: flex;
@@ -373,7 +301,7 @@ h1 {
   margin: 1px 0 0;
 }
 
-/* ── Exercise Tags ── */
+/* ── Tags ── */
 .ex-tags {
   display: flex;
   flex-direction: column;
@@ -382,8 +310,7 @@ h1 {
 }
 
 .tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  background: var(--surface-raised);
   padding: 5px 12px;
   border-radius: var(--radius-sm);
   font-size: 12px;
@@ -398,13 +325,12 @@ h1 {
 
 .tag-meta { color: var(--label-tertiary); }
 
-/* ── Exercise Detail (collapsible) ── */
+/* ── Collapsible Detail ── */
 .ex-arrow {
   margin-left: auto;
-  flex-shrink: 0;
   font-size: 10px;
   color: var(--label-quaternary);
-  transition: transform 0.35s var(--ease-spring), color 0.2s;
+  transition: transform 0.35s var(--ease-spring);
   padding-left: 8px;
 }
 
@@ -440,16 +366,16 @@ h1 {
   color: var(--tint-blue);
   text-decoration: none;
   margin: 4px 0 6px 34px;
-  transition: opacity 0.2s;
 }
 
 .ex-vid:active { opacity: 0.5; }
 
 /* ══════════════════════════════════════════════════════
-   Rules / Protocol Blocks — Frosted Glass
+   Rules / Protocol Blocks
    ══════════════════════════════════════════════════════ */
 .rules {
   margin-top: 16px;
+  background: var(--surface);
   border-radius: var(--radius-md);
   padding: 16px;
 }
@@ -479,26 +405,21 @@ h1 {
   margin: 0;
   font-size: 15px;
   line-height: 20px;
-  letter-spacing: -0.24px;
   color: var(--label-secondary);
 }
 
 .rule span { color: var(--label); font-weight: 600; }
 
-/* ── Cooldown Block ── */
+/* ── Cooldown ── */
 .cooldown-inner {
+  background: var(--surface-raised);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
-  background: var(--glass-elevated);
-  border: 0.5px solid var(--glass-border);
-  box-shadow: var(--glass-inner-glow);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
 }
 
 .cooldown-header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.cooldown-name { font-size: 17px; font-weight: 600; line-height: 22px; color: var(--label); }
-.cooldown-vid { display: block; font-size: 13px; font-weight: 500; color: var(--tint-blue); text-decoration: none; margin: 4px 0 6px; transition: opacity 0.2s; }
+.cooldown-name { font-size: 17px; font-weight: 600; color: var(--label); }
+.cooldown-vid { display: block; font-size: 13px; font-weight: 500; color: var(--tint-blue); text-decoration: none; margin: 4px 0 6px; }
 .cooldown-vid:active { opacity: 0.5; }
 .cooldown-desc { font-size: 13px; line-height: 18px; color: var(--label-tertiary); }
 
@@ -511,21 +432,12 @@ h1 {
   padding-bottom: 20px;
 }
 
-/* ══════════════════════════════════════════════════════
-   Mobile — fine-tune for small screens
-   ══════════════════════════════════════════════════════ */
+/* ── Mobile ── */
 @media (max-width: 600px) {
   body { padding-left: 14px; padding-right: 14px; }
-  .exercises { gap: 8px; }
-  .ex-card { padding: 16px; }
   .ex-tags { margin-left: 0; }
   .ex-tip { padding-left: 0; }
   .ex-vid { margin-left: 0; }
-  .warmup { padding: 14px 16px; }
-  .week-grid { gap: 4px; }
-  .week-day { padding: 8px 3px; }
-  .week-day .wd-label { font-size: 9px; }
-  .week-day .wd-type { font-size: 11px; }
 }
 
 @media (min-width: 600px) {
