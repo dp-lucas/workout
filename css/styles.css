@@ -99,7 +99,6 @@ h1 {
   border-radius: var(--radius-pill);
   padding: 3px;
   margin: 20px 0;
-  height: 44px;
 }
 
 .tab {
@@ -116,7 +115,7 @@ h1 {
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.3s var(--ease-spring);
-  min-height: var(--min-touch);
+  height: 38px;
   -webkit-user-select: none;
   user-select: none;
 }
