@@ -42,13 +42,13 @@
 
 ### Lifting Program
 
-**Day A: Vertical Power (~65 min, 16 working sets)**
+**Day A: Vertical Power (~65 min, 15 working sets)**
 1. Hanging Leg Raises — 2 x 10-12 (tempo 2-0-1-1, rest 60s)
 2. Leg Press — 3 x 6-8 (tempo 3-1-1-0, rest 3m)
 3. Bulgarian Split Squats — 2 x 8/leg (tempo 2-0-1-0, rest 60s alt legs)
 4. Standing OHP — 3 x 6-8 (tempo 2-0-X-0, rest 3m)
 5. Weighted Chin-Ups — 3 x 6-8 (tempo 2-1-X-1, rest 3m)
-6. Barbell Hip Thrusts — 3 x 8-10 (tempo 2-0-1-2, rest 2m)
+6. Standing Calf Raises — 2 x 8-10 (tempo 2-2-1-2, rest 90s)
 
 **Day B: Width & Arms (~55 min, 14 working sets)**
 1. L-Sit Progression Holds — 3 x 15-20s (isometric, rest 60s)
@@ -58,12 +58,12 @@
 5. Face Pulls — 2 x 12-15 (tempo 2-1-1-2, rest 60s)
 6. Barbell Curls + Rope Pushdowns — 3 x 10-12 each (superset, rest 90s)
 
-**Day C: Horizontal Strength (~70 min, 16 working sets)**
+**Day C: Horizontal Strength (~70 min, 17 working sets)**
 1. Ab Wheel Rollouts — 2 x 8-10 (tempo 3-1-1-0, rest 60s)
 2. Trap Bar RDL — 3 x 5 (tempo 3-1-X-1, rest 3m)
 3. Incline Bench Press — 4 x 6-8 (tempo 3-1-1-0, rest 3m)
 4. Seated Cable Rows — 3 x 10-12 (tempo 2-0-1-1, rest 2m)
-5. Lying Leg Curls — 2 x 10-12 (tempo 3-0-1-1, rest 60s)
+5. Barbell Hip Thrusts — 3 x 8-10 (tempo 2-0-1-2, rest 2m)
 6. Seated Calf Raises — 2 x 10-15 (tempo 2-2-1-2, rest 90s)
 
 **Cooldown (every session):** Dead Hangs 2-3 x 30-45s
