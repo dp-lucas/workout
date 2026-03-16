@@ -325,15 +325,27 @@ h1 {
 .tag-meta { color: var(--label-tertiary); }
 
 /* ── Collapsible Detail ── */
-.ex-arrow {
+.ex-hint {
+  font-size: 11px;
+  color: var(--label-tertiary);
   margin-left: auto;
-  font-size: 10px;
-  color: var(--label-quaternary);
-  transition: transform 0.35s var(--ease-spring);
   padding-left: 8px;
+  white-space: nowrap;
+  transition: opacity 0.3s var(--ease-spring);
 }
 
-.ex-card.expanded .ex-arrow { transform: rotate(180deg); color: var(--label-tertiary); }
+.ex-card.expanded .ex-hint { opacity: 0; display: none; }
+
+.ex-arrow {
+  margin-left: 6px;
+  font-size: 10px;
+  color: var(--label-tertiary);
+  transition: transform 0.35s var(--ease-spring);
+  flex-shrink: 0;
+}
+
+.ex-card:not(.expanded) .ex-arrow { margin-left: auto; }
+.ex-card.expanded .ex-arrow { transform: rotate(180deg); }
 
 .ex-detail-wrap {
   display: grid;

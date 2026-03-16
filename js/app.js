@@ -40,6 +40,10 @@ var warmupVideoMap = {
 // ── Exercise Cards (collapsible + video links + tip formatting) ──
 document.querySelectorAll('.ex-card').forEach(function(card) {
   var top = card.querySelector('.ex-top');
+  var hint = document.createElement('span');
+  hint.className = 'ex-hint';
+  hint.textContent = 'Details';
+  top.appendChild(hint);
   var arrow = document.createElement('span');
   arrow.className = 'ex-arrow';
   arrow.textContent = '\u25be';
