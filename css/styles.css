@@ -266,10 +266,12 @@ h1 {
 
 .ex-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   min-height: 28px;
 }
+
+.ex-top > div { flex: 1; min-width: 0; }
 
 .ex-num {
   font-size: 14px;
@@ -329,23 +331,20 @@ h1 {
   font-size: 12px;
   font-weight: 500;
   color: var(--tint-blue);
-  margin-left: auto;
-  padding-left: 8px;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: opacity 0.3s var(--ease-spring);
 }
 
 .ex-card.expanded .ex-hint { opacity: 0; display: none; }
 
 .ex-arrow {
-  margin-left: 4px;
   font-size: 10px;
   color: var(--tint-blue);
-  transition: transform 0.35s var(--ease-spring);
   flex-shrink: 0;
+  transition: transform 0.35s var(--ease-spring);
 }
 
-.ex-card:not(.expanded) .ex-arrow { margin-left: auto; }
 .ex-card.expanded .ex-arrow { transform: rotate(180deg); color: var(--label-tertiary); }
 
 .ex-detail-wrap {
