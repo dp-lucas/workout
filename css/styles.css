@@ -233,14 +233,6 @@ h1 {
 
 .warmup-detail li::before { content: '\2022'; position: absolute; left: 0; color: var(--label-tertiary); }
 
-.warmup-vid {
-  color: var(--tint-blue);
-  text-decoration: none;
-  font-size: 11px;
-  margin-left: 6px;
-}
-
-.warmup-vid:active { opacity: 0.5; }
 
 /* ══════════════════════════════════════════════════════
    Exercise Cards
@@ -370,16 +362,6 @@ h1 {
 .ex-tip li { padding-left: 16px; position: relative; }
 .ex-tip li::before { content: '\2022'; position: absolute; left: 0; color: var(--label-tertiary); line-height: 20px; }
 
-.ex-vid {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--tint-blue);
-  text-decoration: none;
-  margin: 4px 0 6px 34px;
-}
-
-.ex-vid:active { opacity: 0.5; }
 
 /* ══════════════════════════════════════════════════════
    Rules / Protocol Blocks
@@ -430,8 +412,6 @@ h1 {
 
 .cooldown-header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .cooldown-name { font-size: 17px; font-weight: 600; color: var(--label); }
-.cooldown-vid { display: block; font-size: 13px; font-weight: 500; color: var(--tint-blue); text-decoration: none; margin: 4px 0 6px; }
-.cooldown-vid:active { opacity: 0.5; }
 .cooldown-desc { font-size: 13px; line-height: 18px; color: var(--label-tertiary); }
 
 /* ── Footer ── */
@@ -539,8 +519,7 @@ h1 {
   body { padding-left: 14px; padding-right: 14px; }
   .ex-tags { margin-left: 0; }
   .ex-tip { padding-left: 0; }
-  .ex-vid { margin-left: 0; }
-  .weight-log { margin-left: 0; }
+.weight-log { margin-left: 0; }
 }
 
 @media (min-width: 600px) {
