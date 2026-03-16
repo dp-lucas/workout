@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<title>Workout</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#e5e5e5;min-height:100vh;padding:20px;-webkit-tap-highlight-color:transparent}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;text-align:center}
+  .sub{font-size:13px;color:#737373;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-top:4px}
+  .desc{font-size:13px;color:#a3a3a3;text-align:center;margin-top:10px;line-height:1.5;max-width:500px;margin-left:auto;margin-right:auto}
+  .tabs{display:flex;gap:8px;margin:28px 0 14px}
+  .tab{flex:1;padding:12px 8px;border:1px solid #262626;background:#141414;color:#737373;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:all .2s}
+  .tab.active-a{border-color:#dc2626;background:#dc262618;color:#fff}
+  .tab.active-b{border-color:#2563eb;background:#2563eb18;color:#fff}
+  .tab.active-c{border-color:#059669;background:#05966918;color:#fff}
+
+  .day-header h2{font-size:18px;font-weight:800;margin:0 0 2px}
+  .day-header p{font-size:13px;color:#737373;margin:0}
+  .day-header .color-a{color:#dc2626} .day-header .color-b{color:#2563eb} .day-header .color-c{color:#059669}
+  .warmup{margin-top:10px;background:#1a1a1a;border:1px solid #262626;border-radius:8px;padding:10px 14px;font-size:12px;color:#a3a3a3;line-height:1.6}
+  .warmup span{font-weight:700}
+  .warmup{cursor:pointer;user-select:none;transition:background .2s}
+  .warmup:hover{background:#1f1f1f}
+  .warmup-label{display:flex;align-items:center}
+  .warmup-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#525252;transition:transform .25s ease,color .2s;padding-left:8px}
+  .warmup.expanded .warmup-arrow{transform:rotate(180deg);color:#737373}
+  .warmup-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+  .warmup.expanded .warmup-detail{grid-template-rows:1fr}
+  .warmup-inner{overflow:hidden}
+  .warmup-detail ul{list-style:none;padding:8px 0 0;margin:6px 0 0;border-top:1px solid #262626;display:grid;gap:5px}
+  .warmup-detail li{padding-left:14px;position:relative;font-size:12px;color:#a3a3a3;line-height:1.5}
+  .warmup-detail li::before{content:'•';position:absolute;left:0;color:#525252}
+  .exercises{display:grid;gap:6px;margin-top:14px}
+  .ex-card{background:#141414;border:1px solid #1f1f1f;border-radius:10px;padding:14px 16px;position:relative}
+  .ex-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{font-size:12px;font-weight:800;min-width:20px}
+  .num-a{color:#dc2626} .num-b{color:#2563eb} .num-c{color:#059669}
+  .ex-slot{font-size:10px;color:#737373;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+  .ex-name{font-size:15px;font-weight:700;color:#fff;margin:2px 0 0}
+  .ex-tags{display:flex;flex-direction:column;gap:4px;margin:0 0 8px 30px}
+  .tag{background:#1f1f1f;padding:4px 10px;border-radius:5px;font-size:12px}
+  .tag-sets{color:#d4d4d4;font-weight:600}
+  .tag-meta{color:#a3a3a3}
+  .ex-tip{font-size:12px;color:#a3a3a3;line-height:1.6;padding:10px 0 4px 30px;border-top:1px solid #1f1f1f;margin-top:2px}
+  .ex-tip ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+  .ex-tip li{padding-left:16px;position:relative}
+  .ex-tip li::before{content:'•';position:absolute;left:0;color:#404040;line-height:1.6}
+  .ex-card.super-optional{opacity:.45;border-style:dashed}
+  .ex-card.super-optional:hover{opacity:.75}
+  .ex-card.super-optional .opt-badge{display:inline-block}
+  .opt-badge{display:none;background:#52525222;color:#737373;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;position:absolute;top:8px;right:10px;text-transform:uppercase}
+  .ex-card{cursor:pointer;user-select:none;transition:border-color .2s,opacity .2s}
+  .ex-card:hover{border-color:#2a2a2a}
+  .ex-card.expanded:has(.num-a){border-color:#dc262635}
+  .ex-card.expanded:has(.num-b){border-color:#2563eb35}
+  .ex-card.expanded:has(.num-c){border-color:#05966935}
+  .ex-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#404040;transition:transform .25s ease,color .2s;padding-left:8px}
+  .ex-card.expanded .ex-arrow{transform:rotate(180deg);color:#737373}
+  .ex-detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+  .ex-card.expanded .ex-detail-wrap{grid-template-rows:1fr}
+  .ex-detail-inner{overflow:hidden}
+  .ex-vid{display:block;font-size:11px;color:#525252;text-decoration:none;margin:2px 0 6px 30px;transition:color .2s}
+  .ex-vid:hover{color:#a3a3a3}
+  .warmup-vid{color:#525252;text-decoration:none;font-size:10px;margin-left:8px;transition:color .2s}
+  .warmup-vid:hover{color:#a3a3a3}
+  .rules{margin-top:24px;background:#141414;border:1px solid #262626;border-radius:12px;padding:20px}
+  .rules h3{font-size:14px;font-weight:800;color:#fff;margin:0 0 14px;letter-spacing:1px;text-transform:uppercase}
+  .rules-grid{display:grid;gap:10px}
+  .rule{display:flex;gap:10px;align-items:baseline}
+  .rule-num{font-size:11px;font-weight:800;color:#525252;min-width:18px}
+  .rule p{margin:0;font-size:13px;color:#a3a3a3;line-height:1.5}
+  .rule span{color:#e5e5e5;font-weight:700}
+  .footer{text-align:center;font-size:11px;color:#404040;margin-top:20px;padding-bottom:20px}
+  .panel{display:none}.panel.active{display:block}
+
+  @media(max-width:600px){
+    body{padding:14px}
+    .tabs{gap:6px;margin:20px 0 14px}
+    .tab{padding:14px 6px;font-size:12px;border-radius:10px}
+    .exercises{gap:10px}
+    .ex-card{padding:16px;border-radius:12px}
+    .ex-num{font-size:14px;font-weight:900}
+    .ex-name{font-size:16px}
+    .ex-tags{margin-left:0}
+    .ex-tip{padding-left:0;font-size:13px}
+    .ex-vid{margin-left:0}
+    .warmup{font-size:13px;padding:12px 14px}
+    .rules{padding:16px}
+    .cond-panel{padding:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>WORKOUT</h1>
+  <p class="sub">The Final Cut — Refined</p>
+  <p class="desc">Tall. Toned. Athletic. Built for the lean V-taper — big arms, slim waist, chiseled abs, great yoke.</p>
+
+  <div class="tabs">
+    <button class="tab active-a" id="tab-a" onclick="show('a')">DAY A</button>
+    <button class="tab" id="tab-b" onclick="show('b')">DAY B</button>
+    <button class="tab" id="tab-c" onclick="show('c')">DAY C</button>
+  </div>
+
+  <div id="content">
+
+    <!-- DAY A -->
+    <div class="panel active" id="panel-a">
+      <div class="day-header">
+        <h2 class="color-a">DAY A: Vertical Power & Drive</h2>
+        <p>Focus: Vertical Push, Vertical Pull, Quad-Dominant Legs</p>
+        <div class="warmup"><span style="color:#dc2626">MOBILITY (~5 min): </span>World's Greatest Stretch: 1 × 5/side, Tempo: 2-3s each position — 90/90 Hip Switches: 2 × 5/side, Tempo: 2-1-2-1 (hip internal/external rotation for leg press depth and split squat stability) — Wall Slides: 2 × 8, Tempo: 2-1-2-1 (scapular upward rotation + shoulder flexion for pressing and chin-ups) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:#dc2626">WARM-UP: </span>Band Pull-Aparts: 2 × 20, Tempo: 1-0-1-1 + Light Lateral Raises: 2 × 15–20, Tempo: 1-0-1-0 (Rest: 30s between sets) (activates rear delts & lateral delts — primes shoulders for pressing and builds delt cap volume across the week)</div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">01</span><div><div class="ex-slot">Primer</div><div class="ex-name">Box Jumps</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 5</span><span class="tag tag-meta">Tempo: Explosive Reset</span><span class="tag tag-meta">Rest: 60–90s</span></div><p class="ex-tip">Step back, hinge, explode onto the box. Land soft — absorb with the whole foot. Stand tall at top, step down (don't jump down). Reset fully between reps. True plyometric CNS primer.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">02</span><div><div class="ex-slot">Core (Anti-Extension)</div><div class="ex-name">Hanging Leg Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12</span><span class="tag tag-meta">Tempo: 2-0-1-1</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Dead hang, posterior pelvic tilt first, then raise legs. Control the descent — no swinging. Straight legs if possible, bent knees to scale down. The hang itself decompresses the spine. 2s lowering legs | 1s raising legs | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">03</span><div><div class="ex-slot">Quad Dominant</div><div class="ex-name">Leg Press</div></div></div><div class="ex-tags"><span class="tag tag-sets">1 Top Set (6–8) + 2 Back-Off (10–12)</span><span class="tag tag-meta">Tempo: 3-1-1-0 / Back-Off: 5-1-1-0</span><span class="tag tag-meta">Rest: 3–5m / 3m</span></div><p class="ex-tip">Feet shoulder-width, mid-platform. Lower the sled until knees hit 90° — full ROM, no half reps. Drive through the whole foot. Go brutally heavy on the top set. Don't lock out knees at the top. Top Set: 3s lowering | 1s pause | 1s up | no pause. Back-Off: 5s slow eccentric | 1s pause | 1s up | no pause — slower eccentric on lighter sets builds longer, denser muscle fibers.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">04</span><div><div class="ex-slot">Unilateral Quad</div><div class="ex-name">Bulgarian Split Squats</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12/leg</span><span class="tag tag-meta">Tempo: 2-1-1-0</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Rear foot elevated on bench. DBs hang at sides. Lower until front thigh is parallel. Drive through front heel — back leg is just for balance. Catches bilateral imbalances, fires glute medius, builds single-leg stability. 2s lowering | 1s pause at bottom | 1s driving up | no pause at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">05</span><div><div class="ex-slot">Vertical Push</div><div class="ex-name">Standing Overhead Barbell Press</div></div></div><div class="ex-tags"><span class="tag tag-sets">1 Top Set (3–5) + 2 Back-Off (8–10)</span><span class="tag tag-meta">Tempo: 2-0-X-0 / Back-Off: 4-0-X-0</span><span class="tag tag-meta">Rest: 3–5m / 3m</span></div><p class="ex-tip">Squeeze glutes to protect lower back. Push head through the window at top. Top Set: 2s lowering | explosive press. Back-Off: 4s slow eccentric | explosive press — controlled eccentric on lighter sets maximizes muscle density.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">06</span><div><div class="ex-slot">Vertical Pull</div><div class="ex-name">Weighted Chin-Ups</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–8</span><span class="tag tag-meta">Tempo: 2-1-X-1</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Drive elbows down to your pockets. No swinging or kipping. Last rep of last set: hold chin over bar for max time (aim 10–20s) — isometric peak contraction for lat density (GST principle). 2s lowering | 1s pause at bottom | explosive pull up | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">07</span><div><div class="ex-slot">Calves (Gastrocnemius)</div><div class="ex-name">Standing Calf Raises (Heavy)</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 8–10</span><span class="tag tag-meta">Tempo: 2-2-1-2</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Full 2s pause at top AND bottom. Heavy weight, strict form, no bouncing. 2s lowering heels below platform | 2s pause at stretch | 1s pressing up | 2s squeeze at top.</p></div>
+      </div>
+    </div>
+
+    <!-- DAY B -->
+    <div class="panel" id="panel-b">
+      <div class="day-header">
+        <h2 class="color-b">DAY B: Optional — Width & Detail</h2>
+        <p>Focus: Supplemental Pull, Shoulder Width, Arm Detail</p>
+        <div class="warmup"><span style="color:#2563eb">MOBILITY (~5 min): </span>World's Greatest Stretch: 1 × 5/side, Tempo: 2-3s each position — Shoulder CARs: 3 rounds per arm (1 forward circle + 1 backward circle = 1 round), Tempo: 5s per circle (full shoulder ROM before dips, pull-ups, and lateral raises) — Quadruped Thoracic Rotations: 1 × 5/side, Tempo: 2s rotate + 2s hold (on all fours, hand behind head, rotate elbow to ceiling — keep hips square, only the upper back moves. Opens thoracic spine for pull-ups and overhead reach) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:#2563eb">WARM-UP: </span>Band Pull-Aparts: 2 × 20, Tempo: 1-0-1-1 + Light Lateral Raises: 2 × 15–20, Tempo: 1-0-1-0 (Rest: 30s between sets) (same as Day A — free lateral delt volume every session builds the wide-shoulder illusion over time)</div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">01</span><div><div class="ex-slot">Explosive Primer</div><div class="ex-name">Med Ball Slams</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 5</span><span class="tag tag-meta">Tempo: Explosive</span><span class="tag tag-meta">Rest: 60–90s</span></div><p class="ex-tip">Reach overhead with the ball, then slam it into the ground as hard as possible. Full body — the overhead reach activates lats (primes pulling), the slam drives through shoulders and triceps (primes pressing). Reset fully between reps. Max intent every rep.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">02</span><div><div class="ex-slot">Core (Isometric)</div><div class="ex-name">L-Sit Progression Holds</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 15–20s</span><span class="tag tag-meta">Tempo: Isometric Hold</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Parallel bars or dip handles. Lock arms straight, lift legs parallel to floor and hold. Scale: tuck L-sit (knees bent) → one leg extended → full L-sit. GST isometric — builds dense, hard, flat abs without any bulk. Trains rectus abdominis and TVA simultaneously. No spinal flexion, no oblique hypertrophy.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">03</span><div><div class="ex-slot">Supplemental Pull</div><div class="ex-name">Pull-Ups / Lat Pulldowns</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 8–10</span><span class="tag tag-meta">Tempo: 2-1-1-1</span><span class="tag tag-meta">Rest: 2–3m</span></div><p class="ex-tip">Full dead-hang stretch at bottom. Squeeze lats hard at the top. Build the V-taper. Last rep of last set: hold chin over bar for max time (aim 10–20s) — isometric peak contraction for lat density (GST principle). 2s lowering | 1s pause at bottom | 1s pulling up | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">04</span><div><div class="ex-slot">Triceps Compound</div><div class="ex-name">Weighted Dips (Upright)</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–10</span><span class="tag tag-meta">Tempo: 3-0-1-0</span><span class="tag tag-meta">Rest: 2–3m</span></div><p class="ex-tip">Stay upright — torso vertical, elbows tight to body. This locks it in as a tricep builder. Shoulders down and back. 3s lowering | 1s pressing up.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">05</span><div><div class="ex-slot">Width Builder</div><div class="ex-name">Lateral Raises (Heavy Working Sets)</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 10–12</span><span class="tag tag-meta">Tempo: 2-0-1-1</span><span class="tag tag-meta">Rest: 60–90s</span></div><p class="ex-tip">Slight forward lean, lead with elbows, raise to just above shoulder height. Controlled negative — don't just drop the weight. Go heavier than warm-up laterals, this is for growth. 2s lowering | 1s raising | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">06</span><div><div class="ex-slot">Rear Delts / Posture</div><div class="ex-name">Face Pulls</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 12–15</span><span class="tag tag-meta">Tempo: 2-1-1-2</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Pull towards your eyes. Rotate hands back at the end (double biceps pose). 2s letting rope return | 1s pause | 1s pulling to face | 2s squeeze in external rotation.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">07</span><div><div class="ex-slot">Arms Superset</div><div class="ex-name">Strict Barbell Curls + Rope Pushdowns</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 10–12 / 3 × 10–12</span><span class="tag tag-meta">Tempo: 3-0-1-0 / 2-0-1-1</span><span class="tag tag-meta">Rest: 90s after pair</span></div><p class="ex-tip">Curls: Elbows pinned, no swinging. Pushdowns: Split the rope at the bottom, squeeze triceps hard. Lateral head focus = horseshoe shape. Curls: 3s lowering | 1s curling up. Pushdowns: 2s letting rope return | 1s pushing down | 1s squeeze.</p></div>
+        <div class="ex-card super-optional"><div class="opt-badge">Only if you feel like it</div><div class="ex-top"><span class="ex-num num-b">08</span><div><div class="ex-slot">Legs Superset</div><div class="ex-name">Leg Extensions + Lying Leg Curls</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12 / 2 × 10–12</span><span class="tag tag-meta">Tempo: 2-1-1-1 / 3-1-1-2</span><span class="tag tag-meta">Rest: 90s after pair</span></div><p class="ex-tip">Extensions: Full ROM, squeeze quads hard at lockout for 1s, control the negative. Curls: Slow eccentric (3s), pause at bottom stretch (1s), curl up, hard 2s squeeze at top. Don't let hips rise off the pad. Quad/hamstring superset rounds out lower body on Day B. Extensions: 2s lowering | 1s pause at stretch | 1s extending | 1s squeeze. Curls: 3s extending legs out | 1s pause at stretch | 1s curling up | 2s squeeze at top.</p></div>
+      </div>
+    </div>
+
+    <!-- DAY C -->
+    <div class="panel" id="panel-c">
+      <div class="day-header">
+        <h2 class="color-c">DAY C: Horizontal Strength & Ground Force</h2>
+        <p>Focus: Horizontal Push, Horizontal Pull, Posterior Chain</p>
+        <div class="warmup"><span style="color:#059669">MOBILITY (~5 min): </span>World's Greatest Stretch: 1 × 5/side, Tempo: 2-3s each position — 90/90 Hip Switches: 2 × 5/side, Tempo: 2-1-2-1 (hip rotation for RDL depth and position) — Cat-Cow: 2 × 8, Tempo: 3-0-3-0 (spinal segmentation and awareness for the hinge pattern) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:#059669">WARM-UP: </span>Band Pull-Aparts: 2 × 20, Tempo: 1-0-1-1 + Light Lateral Raises: 2 × 15–20, Tempo: 1-0-1-0 (Rest: 30s between sets) (every session = ~6 extra lateral delt sets/week. The muscle most responsible for looking wide at the shoulders and narrow at the waist)</div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">01</span><div><div class="ex-slot">Primer</div><div class="ex-name">Trap Bar Jumps</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 3</span><span class="tag tag-meta">Tempo: Explosive Reset</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">~30–40% 1RM. Hinge, grip, and jump as high as possible. Land soft, reset the bar, repeat. True plyometric power — full triple extension. CNS primer for the heavy RDLs that follow.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">02</span><div><div class="ex-slot">Core (Anti-Extension)</div><div class="ex-name">Ab Wheel Rollouts</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 8–10</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Kneel on a pad, brace hard, roll out as far as you can control — no lower back sag. Squeeze abs to pull back. Scale: half range → full range → standing rollouts. The king of anti-extension — eccentrically loads the rectus abdominis, creating the tight, pulled-in look. Zero oblique load. 3s rolling out | 1s pause at full extension | 1s pulling back | no pause.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">03</span><div><div class="ex-slot">The Monster</div><div class="ex-name">Trap Bar Romanian Deadlift</div></div></div><div class="ex-tags"><span class="tag tag-sets">1 Top Set (5) + 2 Back-Off (5)</span><span class="tag tag-meta">Tempo: X-1-X-1 / Back-Off: 4-1-X-1</span><span class="tag tag-meta">Rest: 3–5m</span></div><p class="ex-tip">Hinge at hips, push them back. Keep the bar close, slight knee bend. Deep hamstring stretch at the bottom — drive hips forward to lockout. Chest tall throughout. Top Set: explosive hinge down | 1s pause | explosive drive | 1s lockout. Back-Off: 4s controlled eccentric | 1s pause at stretch | explosive drive | 1s lockout — slow eccentric stretches hamstrings under load for longer, denser fibers.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">04</span><div><div class="ex-slot">Glutes</div><div class="ex-name">Barbell Hip Thrusts</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12</span><span class="tag tag-meta">Tempo: 2-2-1-0</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Drive through heels, squeeze glutes hard at lockout for 2s. Don't hyperextend the lower back — stop when hips are level. Chin tucked. Completes the posterior chain with direct glute isolation alongside Trap Bar RDLs. 2s lowering hips | 2s pause at bottom | 1s driving up to lockout | no pause at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">05</span><div><div class="ex-slot">Horizontal Push</div><div class="ex-name">Incline Bench Press</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 8–10</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Bar to upper chest (below collarbone). Control the descent strictly. 3s lowering bar to chest | 1s pause at chest | 1s pressing up | no pause at lockout.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">06</span><div><div class="ex-slot">Horizontal Pull</div><div class="ex-name">Seated Cable Rows</div></div></div><div class="ex-tags"><span class="tag tag-sets">4 × 10–12</span><span class="tag tag-meta">Tempo: 2-0-1-1</span><span class="tag tag-meta">Rest: 2m</span></div><p class="ex-tip">Sit tall, chest up, feet braced. Pull handle to lower ribcage, squeeze shoulder blades together. Don't lean back — torso stays upright throughout. 2s releasing cable forward | 1s pulling to ribcage | 1s squeeze at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-c">07</span><div><div class="ex-slot">Calves (Soleus)</div><div class="ex-name">Seated Calf Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 10–15</span><span class="tag tag-meta">Tempo: 2-1-1-2</span><span class="tag tag-meta">Rest: 60–90s</span></div><p class="ex-tip">Knee bent at 90° loads the soleus (the deeper, wider calf muscle). Full stretch at bottom, full squeeze at top. Pause at both ends. 2s lowering heels | 1s pause at stretch | 1s pressing up | 2s squeeze at top.</p></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="rules" style="margin-top:14px;border-color:#333">
+    <h3 style="font-size:12px;color:#737373;margin-bottom:8px">AFTER YOUR LAST EXERCISE → DAILY COOLDOWN (Every Session)</h3>
+    <div style="background:#1a1a1a;border-radius:8px;padding:14px;margin-bottom:8px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#e5e5e5">Dead Hangs</span><span class="tag tag-sets" style="font-size:11px">2–3 × 30–45s</span><span class="tag tag-meta" style="font-size:11px">Tempo: Hold</span><span class="tag tag-meta" style="font-size:11px">Rest: 60s</span></div>
+      <a href="https://www.youtube.com/watch?v=DvJnmHynMfo" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
+      <p style="font-size:12px;color:#737373;line-height:1.5">Decompress the spine after every session. Relax everything — shoulders, lats, hips. Grip work is a bonus.</p>
+    </div>
+    <div style="background:#1a1a1a;border:1px solid #f59e0b30;border-radius:8px;padding:14px;margin-bottom:8px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#f59e0b">Stomach Vacuums</span><span class="tag tag-sets" style="font-size:11px">3 × 20–30s holds</span><span class="tag tag-meta" style="font-size:11px">Tempo: Isometric Hold</span><span class="tag tag-meta" style="font-size:11px">Rest: 30s</span></div>
+      <a href="https://www.youtube.com/watch?v=ODOHve6b8q8" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
+      <p style="font-size:12px;color:#737373;line-height:1.5">Exhale all air, pull belly button to spine, hold. Trains the transverse abdominis — the internal corset that pulls your waist tight at rest. Do standing or on all fours.</p>
+    </div>
+    <h3 style="font-size:12px;font-weight:800;color:#dc2626;letter-spacing:1px;text-transform:uppercase;margin:14px 0 10px">THEN → APT CORRECTION (Every Session)</h3>
+    <div style="background:#1a1a1a;border:1px solid #dc262630;border-radius:8px;padding:14px;margin-bottom:8px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#e5e5e5">Kneeling Hip Flexor Stretch</span><span class="tag tag-sets" style="font-size:11px">1 × 60s/side</span><span class="tag tag-meta" style="font-size:11px">Tempo: Static Hold</span><span class="tag tag-meta" style="font-size:11px">Rest: none — switch sides</span></div>
+      <p style="font-size:12px;color:#737373;line-height:1.5">Half-kneeling, back knee on pad. Squeeze the glute of the back leg and push hips forward. Lengthens the psoas and rectus femoris — the two muscles that pull the pelvis into anterior tilt.</p>
+    </div>
+    <div style="background:#1a1a1a;border:1px solid #dc262630;border-radius:8px;padding:14px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap"><span style="font-size:15px;font-weight:700;color:#e5e5e5">Dead Bugs</span><span class="tag tag-sets" style="font-size:11px">2 × 10/side</span><span class="tag tag-meta" style="font-size:11px">Tempo: 3-1-3-0</span><span class="tag tag-meta" style="font-size:11px">Rest: 30s</span></div>
+      <a href="https://www.youtube.com/watch?v=eEhoSeBFoBk" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;color:#525252;text-decoration:none;margin:0 0 8px;transition:color .2s">▶ Watch Tutorial</a>
+      <p style="font-size:12px;color:#737373;line-height:1.5">Lie face-up, arms straight to ceiling, knees at 90°. Press lower back flat into the floor (posterior pelvic tilt). Extend opposite arm and leg while keeping the lower back glued to the ground. If your back arches off the floor, you've gone too far.</p>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules">
+    <h3>The Athletic Rules</h3>
+    <div class="rules-grid">
+      <div class="rule"><span class="rule-num">1.</span><p><span>Toned at Rest: </span>Heavy loads + explosive lifting = high myogenic tone. Muscles stay hard even when relaxed.</p></div>
+      <div class="rule"><span class="rule-num">2.</span><p><span>The V-Taper: </span>Built by lats & delts, revealed by leanness. Prioritize pulls equal to pushes.</p></div>
+      <div class="rule"><span class="rule-num">3.</span><p><span>Density over Pump: </span>Straight heavy sets, no drop sets. Chase neural adaptations, not the pump.</p></div>
+      <div class="rule"><span class="rule-num">4.</span><p><span>Conditioning = The Look: </span>Cardio done separately — leanness is built outside the weight room.</p></div>
+      <div class="rule"><span class="rule-num">5.</span><p><span>Tempo Key: </span>Eccentric – Pause Bottom – Concentric – Pause Top (e.g., 3-1-1-0). X = Explosive.</p></div>
+    </div>
+  </div>
+
+  <p class="footer">3 Lifting Days — Built for the tall, lean, athletic look.</p>
+</div>
+
+<script>
+  const panels = ['a','b','c'];
+  function show(id) {
+    panels.forEach(p => {
+      document.getElementById('panel-' + p).classList.remove('active');
+      document.getElementById('tab-' + p).className = 'tab';
+    });
+    document.getElementById('panel-' + id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active-' + id);
+  }
+
+  var videoMap = {
+    'Leg Press': 'https://www.youtube.com/watch?v=sEM_zo9w2ss',
+    'Standing Overhead Barbell Press': 'https://www.youtube.com/watch?v=j7ULT6dznNc',
+    'Weighted Chin-Ups': 'https://www.youtube.com/watch?v=-HV2bwkP6VU',
+    'Barbell Hip Thrusts': 'https://www.youtube.com/watch?v=lAnqN0J_p5A',
+    'Pull-Ups / Lat Pulldowns': 'https://www.youtube.com/watch?v=poyr8KenUfc',
+    'Weighted Dips (Upright)': 'https://www.youtube.com/watch?v=ZQnPQG5d67E',
+    'Lateral Raises (Heavy Working Sets)': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
+    'Face Pulls': 'https://www.youtube.com/watch?v=7ZvpXA_mFpQ',
+    'Strict Barbell Curls + Rope Pushdowns': 'https://www.youtube.com/watch?v=LzwgB15UdO8',
+    'Trap Bar Romanian Deadlift': 'https://www.youtube.com/watch?v=aD_zzsNrdqE',
+    'Incline Bench Press': 'https://www.youtube.com/watch?v=uIzbJX5EVIY',
+    'Seated Cable Rows': 'https://www.youtube.com/watch?v=GZbfZ033f74'
+  };
+  var warmupVideoMap = {
+    'World\'s Greatest Stretch': 'https://www.youtube.com/watch?v=-CiWQ2IvY34',
+    '90/90 Hip Switches': 'https://www.youtube.com/watch?v=F1XdXdCjERk',
+    'Wall Slides': 'https://www.youtube.com/watch?v=6Y3nRd9yd3M',
+    'Band Pull-Aparts': 'https://www.youtube.com/watch?v=nMB_zabRo74',
+    'Light Lateral Raises': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
+    'Cat-Cow': 'https://www.youtube.com/watch?v=y39PrKY_4JM'
+  };
+
+  document.querySelectorAll('.ex-card').forEach(function(card) {
+    var top = card.querySelector('.ex-top');
+    var arrow = document.createElement('span');
+    arrow.className = 'ex-arrow';
+    arrow.textContent = '▾';
+    top.appendChild(arrow);
+
+    var tip = card.querySelector('.ex-tip');
+    if (!tip) return;
+    var raw = tip.textContent.trim().replace('Rev. Curls', 'Reverse Curls');
+    var bullets = raw.split(/\s*\|\s*|\.\s+/)
+      .map(function(s){ return s.replace(/\.$/, '').trim(); })
+      .filter(Boolean);
+    tip.innerHTML = '<ul>' + bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'ex-detail-wrap';
+    var inner = document.createElement('div');
+    inner.className = 'ex-detail-inner';
+    tip.parentNode.insertBefore(wrap, tip);
+    wrap.appendChild(inner);
+    inner.appendChild(tip);
+
+    var exName = card.querySelector('.ex-name');
+    var vidUrl = exName && videoMap[exName.textContent.trim()];
+    if (vidUrl) {
+      var a = document.createElement('a');
+      a.className = 'ex-vid';
+      a.href = vidUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = '▶ Watch Tutorial';
+      a.addEventListener('click', function(e) { e.stopPropagation(); });
+      card.insertBefore(a, wrap);
+    }
+
+    card.addEventListener('click', function() { card.classList.toggle('expanded'); });
+  });
+
+  document.querySelectorAll('.warmup').forEach(function(warmup) {
+    var labelSpan = warmup.querySelector('span');
+    var isMobility = labelSpan.textContent.indexOf('MOBILITY') !== -1;
+
+    var contentText = '';
+    warmup.childNodes.forEach(function(node) {
+      if (node.nodeType === 3) contentText += node.textContent;
+    });
+    contentText = contentText.trim();
+
+    var bullets = contentText.split(isMobility ? ' \u2014 ' : ' + ')
+      .map(function(s){ return s.trim(); }).filter(Boolean);
+
+    var labelRow = document.createElement('div');
+    labelRow.className = 'warmup-label';
+    labelRow.appendChild(labelSpan.cloneNode(true));
+    var wArrow = document.createElement('span');
+    wArrow.className = 'warmup-arrow';
+    wArrow.textContent = '\u25be';
+    labelRow.appendChild(wArrow);
+
+    var detail = document.createElement('div');
+    detail.className = 'warmup-detail';
+    var wInner = document.createElement('div');
+    wInner.className = 'warmup-inner';
+    var ul = document.createElement('ul');
+    bullets.forEach(function(b) {
+      var li = document.createElement('li');
+      li.textContent = b;
+      var wKey = Object.keys(warmupVideoMap).find(function(k){ return b.indexOf(k) === 0; });
+      if (wKey) {
+        var wa = document.createElement('a');
+        wa.className = 'warmup-vid';
+        wa.href = warmupVideoMap[wKey];
+        wa.target = '_blank';
+        wa.rel = 'noopener noreferrer';
+        wa.textContent = '▶';
+        wa.addEventListener('click', function(e) { e.stopPropagation(); });
+        li.appendChild(wa);
+      }
+      ul.appendChild(li);
+    });
+    wInner.appendChild(ul);
+    detail.appendChild(wInner);
+
+    warmup.innerHTML = '';
+    warmup.appendChild(labelRow);
+    warmup.appendChild(detail);
+    warmup.addEventListener('click', function() { warmup.classList.toggle('expanded'); });
+  });
+</script>
+</body>
+</html>
