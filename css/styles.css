@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Reset & Base ── */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#e5e5e5;min-height:100vh;padding:20px;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:900px;margin:0 auto}
+
+/* ── Typography ── */
+h1{font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;text-align:center}
+.sub{font-size:13px;color:#737373;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-top:4px}
+.desc{font-size:13px;color:#a3a3a3;text-align:center;margin-top:10px;line-height:1.5;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:8px;margin:28px 0 14px}
+.tab{flex:1;padding:12px 8px;border:1px solid #262626;background:#141414;color:#737373;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:all .2s}
+.tab.active-a{border-color:#dc2626;background:#dc262618;color:#fff}
+.tab.active-b{border-color:#2563eb;background:#2563eb18;color:#fff}
+.tab.active-c{border-color:#059669;background:#05966918;color:#fff}
+.tab.active-r{border-color:#f59e0b;background:#f59e0b18;color:#fff}
+
+/* ── Day Headers ── */
+.day-header h2{font-size:18px;font-weight:800;margin:0 0 2px}
+.day-header p{font-size:13px;color:#737373;margin:0}
+.day-header .color-a{color:#dc2626}
+.day-header .color-b{color:#2563eb}
+.day-header .color-c{color:#059669}
+.day-header .color-r{color:#f59e0b}
+
+/* ── Warmup / Mobility Blocks ── */
+.warmup{margin-top:10px;background:#1a1a1a;border:1px solid #262626;border-radius:8px;padding:10px 14px;font-size:12px;color:#a3a3a3;line-height:1.6;cursor:pointer;user-select:none;transition:background .2s}
+.warmup span{font-weight:700}
+.warmup:hover{background:#1f1f1f}
+.warmup-label{display:flex;align-items:center}
+.warmup-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#525252;transition:transform .25s ease,color .2s;padding-left:8px}
+.warmup.expanded .warmup-arrow{transform:rotate(180deg);color:#737373}
+.warmup-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.warmup.expanded .warmup-detail{grid-template-rows:1fr}
+.warmup-inner{overflow:hidden}
+.warmup-detail ul{list-style:none;padding:8px 0 0;margin:6px 0 0;border-top:1px solid #262626;display:grid;gap:5px}
+.warmup-detail li{padding-left:14px;position:relative;font-size:12px;color:#a3a3a3;line-height:1.5}
+.warmup-detail li::before{content:'•';position:absolute;left:0;color:#525252}
+.warmup-vid{color:#525252;text-decoration:none;font-size:10px;margin-left:8px;transition:color .2s}
+.warmup-vid:hover{color:#a3a3a3}
+
+/* ── Exercise Cards ── */
+.exercises{display:grid;gap:6px;margin-top:14px}
+.ex-card{background:#141414;border:1px solid #1f1f1f;border-radius:10px;padding:14px 16px;position:relative;cursor:pointer;user-select:none;transition:border-color .2s,opacity .2s}
+.ex-card:hover{border-color:#2a2a2a}
+.ex-card.expanded:has(.num-a){border-color:#dc262635}
+.ex-card.expanded:has(.num-b){border-color:#2563eb35}
+.ex-card.expanded:has(.num-c){border-color:#05966935}
+.ex-card.expanded:has(.num-r){border-color:#f59e0b35}
+.ex-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ex-num{font-size:12px;font-weight:800;min-width:20px}
+.num-a{color:#dc2626} .num-b{color:#2563eb} .num-c{color:#059669} .num-r{color:#f59e0b}
+.ex-slot{font-size:10px;color:#737373;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.ex-name{font-size:15px;font-weight:700;color:#fff;margin:2px 0 0}
+.ex-tags{display:flex;flex-direction:column;gap:4px;margin:0 0 8px 30px}
+.tag{background:#1f1f1f;padding:4px 10px;border-radius:5px;font-size:12px}
+.tag-sets{color:#d4d4d4;font-weight:600}
+.tag-meta{color:#a3a3a3}
+
+/* ── Exercise Detail (collapsible) ── */
+.ex-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#404040;transition:transform .25s ease,color .2s;padding-left:8px}
+.ex-card.expanded .ex-arrow{transform:rotate(180deg);color:#737373}
+.ex-detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.ex-card.expanded .ex-detail-wrap{grid-template-rows:1fr}
+.ex-detail-inner{overflow:hidden}
+.ex-tip{font-size:12px;color:#a3a3a3;line-height:1.6;padding:10px 0 4px 30px;border-top:1px solid #1f1f1f;margin-top:2px}
+.ex-tip ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.ex-tip li{padding-left:16px;position:relative}
+.ex-tip li::before{content:'•';position:absolute;left:0;color:#404040;line-height:1.6}
+.ex-vid{display:block;font-size:11px;color:#525252;text-decoration:none;margin:2px 0 6px 30px;transition:color .2s}
+.ex-vid:hover{color:#a3a3a3}
+
+/* ── Rules / Protocol Blocks ── */
+.rules{margin-top:24px;background:#141414;border:1px solid #262626;border-radius:12px;padding:20px}
+.rules h3{font-size:14px;font-weight:800;color:#fff;margin:0 0 14px;letter-spacing:1px;text-transform:uppercase}
+.rules-grid{display:grid;gap:10px}
+.rule{display:flex;gap:10px;align-items:baseline}
+.rule-num{font-size:11px;font-weight:800;color:#525252;min-width:18px}
+.rule p{margin:0;font-size:13px;color:#a3a3a3;line-height:1.5}
+.rule span{color:#e5e5e5;font-weight:700}
+
+/* ── Weekly Schedule Grid ── */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:20px 0 10px}
+.week-day{background:#141414;border:1px solid #1f1f1f;border-radius:8px;padding:10px 6px;text-align:center}
+.week-day .wd-label{font-size:10px;font-weight:700;color:#525252;text-transform:uppercase;letter-spacing:1px}
+.week-day .wd-type{font-size:12px;font-weight:800;margin-top:4px}
+.week-day.wd-lift{border-color:#262626}
+.week-day.wd-run{border-color:#f59e0b30}
+.week-day.wd-rest{border-color:#16a34a30}
+.week-day .wd-type.type-a{color:#dc2626}
+.week-day .wd-type.type-b{color:#2563eb}
+.week-day .wd-type.type-c{color:#059669}
+.week-day .wd-type.type-run{color:#f59e0b}
+.week-day .wd-type.type-rest{color:#16a34a}
+
+/* ── Session Meta Tags ── */
+.session-meta{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+.session-meta .sm-tag{background:#1a1a1a;border:1px solid #262626;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;color:#737373}
+.session-meta .sm-tag strong{color:#a3a3a3}
+
+/* ── Panels ── */
+.panel{display:none}
+.panel.active{display:block}
+
+/* ── Footer ── */
+.footer{text-align:center;font-size:11px;color:#404040;margin-top:20px;padding-bottom:20px}
+
+/* ── Mobile ── */
+@media(max-width:600px){
+  body{padding:14px}
+  .tabs{gap:6px;margin:20px 0 14px}
+  .tab{padding:14px 6px;font-size:11px;border-radius:10px}
+  .exercises{gap:10px}
+  .ex-card{padding:16px;border-radius:12px}
+  .ex-num{font-size:14px;font-weight:900}
+  .ex-name{font-size:16px}
+  .ex-tags{margin-left:0}
+  .ex-tip{padding-left:0;font-size:13px}
+  .ex-vid{margin-left:0}
+  .warmup{font-size:13px;padding:12px 14px}
+  .rules{padding:16px}
+  .week-grid{grid-template-columns:repeat(7,1fr);gap:4px}
+  .week-day{padding:8px 4px}
+  .week-day .wd-label{font-size:9px}
+  .week-day .wd-type{font-size:11px}
+}

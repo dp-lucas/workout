@@ -10,115 +10,9 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="css/styles.css">
 <title>Workout — Hybrid</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#e5e5e5;min-height:100vh;padding:20px;-webkit-tap-highlight-color:transparent}
-  .wrap{max-width:900px;margin:0 auto}
-  h1{font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;text-align:center}
-  .sub{font-size:13px;color:#737373;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-top:4px}
-  .desc{font-size:13px;color:#a3a3a3;text-align:center;margin-top:10px;line-height:1.5;max-width:500px;margin-left:auto;margin-right:auto}
-  .tabs{display:flex;gap:8px;margin:28px 0 14px}
-  .tab{flex:1;padding:12px 8px;border:1px solid #262626;background:#141414;color:#737373;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:all .2s}
-  .tab.active-a{border-color:#dc2626;background:#dc262618;color:#fff}
-  .tab.active-b{border-color:#2563eb;background:#2563eb18;color:#fff}
-  .tab.active-c{border-color:#059669;background:#05966918;color:#fff}
-  .tab.active-r{border-color:#f59e0b;background:#f59e0b18;color:#fff}
-
-  .day-header h2{font-size:18px;font-weight:800;margin:0 0 2px}
-  .day-header p{font-size:13px;color:#737373;margin:0}
-  .day-header .color-a{color:#dc2626} .day-header .color-b{color:#2563eb} .day-header .color-c{color:#059669} .day-header .color-r{color:#f59e0b}
-  .warmup{margin-top:10px;background:#1a1a1a;border:1px solid #262626;border-radius:8px;padding:10px 14px;font-size:12px;color:#a3a3a3;line-height:1.6}
-  .warmup span{font-weight:700}
-  .warmup{cursor:pointer;user-select:none;transition:background .2s}
-  .warmup:hover{background:#1f1f1f}
-  .warmup-label{display:flex;align-items:center}
-  .warmup-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#525252;transition:transform .25s ease,color .2s;padding-left:8px}
-  .warmup.expanded .warmup-arrow{transform:rotate(180deg);color:#737373}
-  .warmup-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
-  .warmup.expanded .warmup-detail{grid-template-rows:1fr}
-  .warmup-inner{overflow:hidden}
-  .warmup-detail ul{list-style:none;padding:8px 0 0;margin:6px 0 0;border-top:1px solid #262626;display:grid;gap:5px}
-  .warmup-detail li{padding-left:14px;position:relative;font-size:12px;color:#a3a3a3;line-height:1.5}
-  .warmup-detail li::before{content:'•';position:absolute;left:0;color:#525252}
-  .exercises{display:grid;gap:6px;margin-top:14px}
-  .ex-card{background:#141414;border:1px solid #1f1f1f;border-radius:10px;padding:14px 16px;position:relative}
-  .ex-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-  .ex-num{font-size:12px;font-weight:800;min-width:20px}
-  .num-a{color:#dc2626} .num-b{color:#2563eb} .num-c{color:#059669} .num-r{color:#f59e0b}
-  .ex-slot{font-size:10px;color:#737373;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
-  .ex-name{font-size:15px;font-weight:700;color:#fff;margin:2px 0 0}
-  .ex-tags{display:flex;flex-direction:column;gap:4px;margin:0 0 8px 30px}
-  .tag{background:#1f1f1f;padding:4px 10px;border-radius:5px;font-size:12px}
-  .tag-sets{color:#d4d4d4;font-weight:600}
-  .tag-meta{color:#a3a3a3}
-  .ex-tip{font-size:12px;color:#a3a3a3;line-height:1.6;padding:10px 0 4px 30px;border-top:1px solid #1f1f1f;margin-top:2px}
-  .ex-tip ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
-  .ex-tip li{padding-left:16px;position:relative}
-  .ex-tip li::before{content:'•';position:absolute;left:0;color:#404040;line-height:1.6}
-  .ex-card{cursor:pointer;user-select:none;transition:border-color .2s,opacity .2s}
-  .ex-card:hover{border-color:#2a2a2a}
-  .ex-card.expanded:has(.num-a){border-color:#dc262635}
-  .ex-card.expanded:has(.num-b){border-color:#2563eb35}
-  .ex-card.expanded:has(.num-c){border-color:#05966935}
-  .ex-card.expanded:has(.num-r){border-color:#f59e0b35}
-  .ex-arrow{margin-left:auto;flex-shrink:0;font-size:10px;color:#404040;transition:transform .25s ease,color .2s;padding-left:8px}
-  .ex-card.expanded .ex-arrow{transform:rotate(180deg);color:#737373}
-  .ex-detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
-  .ex-card.expanded .ex-detail-wrap{grid-template-rows:1fr}
-  .ex-detail-inner{overflow:hidden}
-  .ex-vid{display:block;font-size:11px;color:#525252;text-decoration:none;margin:2px 0 6px 30px;transition:color .2s}
-  .ex-vid:hover{color:#a3a3a3}
-  .warmup-vid{color:#525252;text-decoration:none;font-size:10px;margin-left:8px;transition:color .2s}
-  .warmup-vid:hover{color:#a3a3a3}
-  .rules{margin-top:24px;background:#141414;border:1px solid #262626;border-radius:12px;padding:20px}
-  .rules h3{font-size:14px;font-weight:800;color:#fff;margin:0 0 14px;letter-spacing:1px;text-transform:uppercase}
-  .rules-grid{display:grid;gap:10px}
-  .rule{display:flex;gap:10px;align-items:baseline}
-  .rule-num{font-size:11px;font-weight:800;color:#525252;min-width:18px}
-  .rule p{margin:0;font-size:13px;color:#a3a3a3;line-height:1.5}
-  .rule span{color:#e5e5e5;font-weight:700}
-  .footer{text-align:center;font-size:11px;color:#404040;margin-top:20px;padding-bottom:20px}
-  .panel{display:none}.panel.active{display:block}
-
-  .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:20px 0 10px}
-  .week-day{background:#141414;border:1px solid #1f1f1f;border-radius:8px;padding:10px 6px;text-align:center}
-  .week-day .wd-label{font-size:10px;font-weight:700;color:#525252;text-transform:uppercase;letter-spacing:1px}
-  .week-day .wd-type{font-size:12px;font-weight:800;margin-top:4px}
-  .week-day.wd-lift{border-color:#262626}
-  .week-day.wd-run{border-color:#f59e0b30}
-  .week-day.wd-rest{border-color:#16a34a30}
-  .week-day .wd-type.type-a{color:#dc2626}
-  .week-day .wd-type.type-b{color:#2563eb}
-  .week-day .wd-type.type-c{color:#059669}
-  .week-day .wd-type.type-run{color:#f59e0b}
-  .week-day .wd-type.type-rest{color:#16a34a}
-
-  .session-meta{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
-  .session-meta .sm-tag{background:#1a1a1a;border:1px solid #262626;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;color:#737373}
-  .session-meta .sm-tag strong{color:#a3a3a3}
-
-  @media(max-width:600px){
-    body{padding:14px}
-    .tabs{gap:6px;margin:20px 0 14px}
-    .tab{padding:14px 6px;font-size:11px;border-radius:10px}
-    .exercises{gap:10px}
-    .ex-card{padding:16px;border-radius:12px}
-    .ex-num{font-size:14px;font-weight:900}
-    .ex-name{font-size:16px}
-    .ex-tags{margin-left:0}
-    .ex-tip{padding-left:0;font-size:13px}
-    .ex-vid{margin-left:0}
-    .warmup{font-size:13px;padding:12px 14px}
-    .rules{padding:16px}
-    .week-grid{grid-template-columns:repeat(7,1fr);gap:4px}
-    .week-day{padding:8px 4px}
-    .week-day .wd-label{font-size:9px}
-    .week-day .wd-type{font-size:11px}
-  }
-</style>
 </head>
 <body>
 <div class="wrap">
@@ -163,7 +57,7 @@
         <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">01</span><div><div class="ex-slot">Core</div><div class="ex-name">Hanging Leg Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12</span><span class="tag tag-meta">Tempo: 2-0-1-1</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Dead hang, posterior pelvic tilt first, then raise legs. Control the descent — no swinging. Straight legs if possible, bent knees to scale down. The hang itself decompresses the spine. 2s lowering legs | 1s raising legs | 1s hold at top.</p></div>
         <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">02</span><div><div class="ex-slot">Quads</div><div class="ex-name">Leg Press</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–8</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Feet shoulder-width, mid-platform. Lower the sled until knees hit 90° — full ROM, no half reps. Drive through the whole foot. Don't lock out knees at the top. Same weight across all 3 sets — pick a load where set 3 is a grind. Straight sets, no top/back-off complexity. 3s lowering | 1s pause | 1s up | no pause.</p></div>
         <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">03</span><div><div class="ex-slot">Single-Leg Strength</div><div class="ex-name">Bulgarian Split Squats</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 8/leg</span><span class="tag tag-meta">Tempo: 2-0-1-0</span><span class="tag tag-meta">Rest: 60s (alternate legs)</span></div><p class="ex-tip">Rear foot elevated on bench, DBs hang at sides. Lower until front thigh is parallel, drive through front heel. This is your running injury insurance — trains the glute medius, fixes bilateral imbalances, and builds the single-leg stability that every running stride demands. No pause at the bottom — controlled down, drive up, keep moving. 2s lowering | 1s driving up.</p></div>
-        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">04</span><div><div class="ex-slot">Vertical Push</div><div class="ex-name">Weighted Dips (Lean Forward)</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–8</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Lean forward ~30° to shift emphasis to chest and front delts — different from Day B's upright tricep-focused dips. Shoulders down and back, elbows track slightly outward. Lower until upper arm is parallel to floor, drive up. 3s lowering | 1s pause at bottom | 1s pressing up | no pause at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">04</span><div><div class="ex-slot">Vertical Push</div><div class="ex-name">Weighted Dips (Lean Forward)</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–8</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Lean forward ~30° to shift emphasis to chest and front delts. Shoulders down and back, elbows track slightly outward. Lower until upper arm is parallel to floor, drive up. 3s lowering | 1s pause at bottom | 1s pressing up | no pause at top.</p></div>
         <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">05</span><div><div class="ex-slot">Vertical Pull</div><div class="ex-name">Weighted Chin-Ups</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 6–8</span><span class="tag tag-meta">Tempo: 2-1-X-1</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Drive elbows down to your pockets. No swinging or kipping. Last rep of last set: hold chin over bar for max time (aim 10–20s) — isometric peak contraction for lat density. 2s lowering | 1s pause at bottom | explosive pull up | 1s hold at top.</p></div>
         <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">06</span><div><div class="ex-slot">Calves</div><div class="ex-name">Standing Calf Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 8–10</span><span class="tag tag-meta">Tempo: 2-2-1-2</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Full stretch at the bottom, full squeeze at the top — pause 2s at both ends. Heavy weight, strict form, no bouncing. Standing position loads the gastrocnemius — the outer calf muscle that makes calves look bigger. 2s lowering heels below platform | 2s pause at stretch | 1s pressing up | 2s squeeze at top.</p></div>
       </div>
@@ -179,7 +73,7 @@
           <span class="sm-tag"><strong>14</strong> working sets</span>
           <span class="sm-tag">~<strong>55</strong> min total</span>
         </div>
-        <div class="warmup"><span style="color:#2563eb">MOBILITY (~5 min): </span>Shoulder CARs: 3 rounds per arm (1 forward circle + 1 backward circle = 1 round), Tempo: 5s per circle (full shoulder ROM before dips, pull-ups, and lateral raises) — Quadruped Thoracic Rotations: 1 × 5/side, Tempo: 2s rotate + 2s hold (on all fours, hand behind head, rotate elbow to ceiling — keep hips square, only the upper back moves. Opens thoracic spine for pull-ups and dips) — Wall Slides: 2 × 8, Tempo: 2-1-2-1 (scapular upward rotation for overhead reach and pressing) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:#2563eb">MOBILITY (~5 min): </span>Shoulder CARs: 3 rounds per arm (1 forward circle + 1 backward circle = 1 round), Tempo: 5s per circle (full shoulder ROM before pull-ups, OHP, and lateral raises) — Quadruped Thoracic Rotations: 1 × 5/side, Tempo: 2s rotate + 2s hold (on all fours, hand behind head, rotate elbow to ceiling — keep hips square, only the upper back moves. Opens thoracic spine for pull-ups and OHP) — Wall Slides: 2 × 8, Tempo: 2-1-2-1 (scapular upward rotation for overhead reach and pressing) — Rest: no rest, flow between drills</div>
         <div class="warmup"><span style="color:#2563eb">WARM-UP: </span>Band Pull-Aparts: 2 × 20, Tempo: 1-0-1-1 + Light Lateral Raises: 2 × 15–20, Tempo: 1-0-1-0 (Rest: 30s between sets)</div>
       </div>
       <div class="exercises">
@@ -294,7 +188,7 @@
     <h3>The Hybrid Athlete Rules</h3>
     <div class="rules-grid">
       <div class="rule"><span class="rule-num">1.</span><p><span>Lift Heavy, Lift Fast: </span>Heavy straight sets, 3–8 rep range on compounds. Chase strength per unit of fatigue, not volume.</p></div>
-      <div class="rule"><span class="rule-num">2.</span><p><span>The V-Taper: </span>Built by lats & delts, revealed by leanness. Pulls equal pushes. Warm-up laterals every session.</p></div>
+      <div class="rule"><span class="rule-num">2.</span><p><span>The V-Taper: </span>Built by lats & delts, revealed by leanness. Pulls equal pushes.</p></div>
       <div class="rule"><span class="rule-num">3.</span><p><span>Run Easy: </span>All running is zone 2 — conversational pace. The aerobic base reveals the physique and builds the engine. Never race your easy runs.</p></div>
       <div class="rule"><span class="rule-num">4.</span><p><span>Recovery is Training: </span>Sunday is non-negotiable rest. Sleep 8–9+ hours — concurrent training demands more recovery. If legs are still sore on a run day, walk the full session instead — never skip, just scale down.</p></div>
       <div class="rule"><span class="rule-num">5.</span><p><span>Fuel the Machine: </span>Protein 1.8–2.2 g/kg/day across 4+ meals. Don't skip carbs — glycogen depletion worsens the interference effect. Eat at maintenance or a slight surplus.</p></div>
@@ -305,136 +199,6 @@
   <p class="footer">3 Lifting Days + 3 Running Days + 1 Rest Day — The Hybrid Athlete.</p>
 </div>
 
-<script>
-  const panels = ['a','b','c','r'];
-  function show(id) {
-    panels.forEach(p => {
-      document.getElementById('panel-' + p).classList.remove('active');
-      document.getElementById('tab-' + p).className = 'tab';
-    });
-    document.getElementById('panel-' + id).classList.add('active');
-    document.getElementById('tab-' + id).classList.add('active-' + id);
-  }
-
-  var videoMap = {
-    'Leg Press': 'https://www.youtube.com/watch?v=sEM_zo9w2ss',
-    'Standing Overhead Barbell Press': 'https://www.youtube.com/watch?v=j7ULT6dznNc',
-    'Weighted Chin-Ups': 'https://www.youtube.com/watch?v=-HV2bwkP6VU',
-    'Pull-Ups / Lat Pulldowns': 'https://www.youtube.com/watch?v=poyr8KenUfc',
-    'Weighted Dips (Lean Forward)': 'https://www.youtube.com/watch?v=ZQnPQG5d67E',
-    'Lateral Raises': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
-    'Face Pulls': 'https://www.youtube.com/watch?v=7ZvpXA_mFpQ',
-    'Strict Barbell Curls + Rope Pushdowns': 'https://www.youtube.com/watch?v=LzwgB15UdO8',
-    'Barbell Romanian Deadlift': 'https://www.youtube.com/watch?v=7ADxnAcNjho',
-    'Incline Bench Press': 'https://www.youtube.com/watch?v=uIzbJX5EVIY',
-    'Seated Cable Rows': 'https://www.youtube.com/watch?v=GZbfZ033f74'
-  };
-  var warmupVideoMap = {
-    'World\'s Greatest Stretch': 'https://www.youtube.com/watch?v=-CiWQ2IvY34',
-    '90/90 Hip Switches': 'https://www.youtube.com/watch?v=F1XdXdCjERk',
-    'Wall Slides': 'https://www.youtube.com/watch?v=6Y3nRd9yd3M',
-    'Band Pull-Aparts': 'https://www.youtube.com/watch?v=nMB_zabRo74',
-    'Light Lateral Raises': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
-    'Cat-Cow': 'https://www.youtube.com/watch?v=y39PrKY_4JM',
-    'Ankle Rockers': 'https://www.youtube.com/watch?v=Hb-Q3Iy1HOo',
-    'Bodyweight Squats': 'https://www.youtube.com/watch?v=gsNoPYwWXeM',
-    'Glute Bridges': 'https://www.youtube.com/watch?v=OUgsJ8-Vi0E'
-  };
-
-  document.querySelectorAll('.ex-card').forEach(function(card) {
-    var top = card.querySelector('.ex-top');
-    var arrow = document.createElement('span');
-    arrow.className = 'ex-arrow';
-    arrow.textContent = '▾';
-    top.appendChild(arrow);
-
-    var tip = card.querySelector('.ex-tip');
-    if (!tip) return;
-    var raw = tip.textContent.trim().replace('Rev. Curls', 'Reverse Curls');
-    var bullets = raw.split(/\s*\|\s*|\.\s+/)
-      .map(function(s){ return s.replace(/\.$/, '').trim(); })
-      .filter(Boolean);
-    tip.innerHTML = '<ul>' + bullets.map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>';
-
-    var wrap = document.createElement('div');
-    wrap.className = 'ex-detail-wrap';
-    var inner = document.createElement('div');
-    inner.className = 'ex-detail-inner';
-    tip.parentNode.insertBefore(wrap, tip);
-    wrap.appendChild(inner);
-    inner.appendChild(tip);
-
-    var exName = card.querySelector('.ex-name');
-    var vidUrl = exName && videoMap[exName.textContent.trim()];
-    if (vidUrl) {
-      var a = document.createElement('a');
-      a.className = 'ex-vid';
-      a.href = vidUrl;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.textContent = '▶ Watch Tutorial';
-      a.addEventListener('click', function(e) { e.stopPropagation(); });
-      card.insertBefore(a, wrap);
-    }
-
-    card.addEventListener('click', function() { card.classList.toggle('expanded'); });
-  });
-
-  document.querySelectorAll('.warmup').forEach(function(warmup) {
-    var labelSpan = warmup.querySelector('span');
-    var isMobility = labelSpan.textContent.indexOf('MOBILITY') !== -1;
-
-    var contentText = '';
-    warmup.childNodes.forEach(function(node) {
-      if (node.nodeType === 3) contentText += node.textContent;
-    });
-    contentText = contentText.trim();
-
-    var bullets = contentText.split(isMobility ? ' \u2014 ' : ' + ')
-      .map(function(s){ return s.trim(); }).filter(Boolean);
-
-    var labelRow = document.createElement('div');
-    labelRow.className = 'warmup-label';
-    labelRow.appendChild(labelSpan.cloneNode(true));
-    var wArrow = document.createElement('span');
-    wArrow.className = 'warmup-arrow';
-    wArrow.textContent = '\u25be';
-    labelRow.appendChild(wArrow);
-
-    var detail = document.createElement('div');
-    detail.className = 'warmup-detail';
-    var wInner = document.createElement('div');
-    wInner.className = 'warmup-inner';
-    var ul = document.createElement('ul');
-    bullets.forEach(function(b) {
-      var li = document.createElement('li');
-      li.textContent = b;
-      var wKey = Object.keys(warmupVideoMap).find(function(k){ return b.indexOf(k) === 0; });
-      if (wKey) {
-        var wa = document.createElement('a');
-        wa.className = 'warmup-vid';
-        wa.href = warmupVideoMap[wKey];
-        wa.target = '_blank';
-        wa.rel = 'noopener noreferrer';
-        wa.textContent = '▶';
-        wa.addEventListener('click', function(e) { e.stopPropagation(); });
-        li.appendChild(wa);
-      }
-      ul.appendChild(li);
-    });
-    wInner.appendChild(ul);
-    detail.appendChild(wInner);
-
-    warmup.innerHTML = '';
-    warmup.appendChild(labelRow);
-    warmup.appendChild(detail);
-    warmup.addEventListener('click', function() { warmup.classList.toggle('expanded'); });
-  });
-
-  // Register network-only service worker for PWA install (no caching)
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
+<script src="js/app.js"></script>
 </body>
 </html>
