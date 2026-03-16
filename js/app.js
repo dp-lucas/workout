@@ -12,17 +12,24 @@ function show(id) {
 
 // ── Video Maps ──
 var videoMap = {
+  'Hanging Leg Raises': 'https://www.youtube.com/watch?v=Pr1ieGZ5atk',
   'Leg Press': 'https://www.youtube.com/watch?v=sEM_zo9w2ss',
-  'Standing Overhead Barbell Press': 'https://www.youtube.com/watch?v=j7ULT6dznNc',
-  'Weighted Chin-Ups': 'https://www.youtube.com/watch?v=-HV2bwkP6VU',
-  'Pull-Ups / Lat Pulldowns': 'https://www.youtube.com/watch?v=poyr8KenUfc',
+  'Bulgarian Split Squats': 'https://www.youtube.com/watch?v=uqI3GVwfToU',
   'Weighted Dips (Lean Forward)': 'https://www.youtube.com/watch?v=ZQnPQG5d67E',
+  'Weighted Chin-Ups': 'https://www.youtube.com/watch?v=-HV2bwkP6VU',
+  'Standing Calf Raises': 'https://www.youtube.com/watch?v=RBslMmWqzzE',
+  'L-Sit Progression Holds': 'https://www.youtube.com/watch?v=IUZJoSP66HI',
+  'Pull-Ups / Lat Pulldowns': 'https://www.youtube.com/watch?v=poyr8KenUfc',
+  'Standing Overhead Barbell Press': 'https://www.youtube.com/watch?v=j7ULT6dznNc',
   'Lateral Raises': 'https://www.youtube.com/watch?v=ufrFCjERMDc',
   'Face Pulls': 'https://www.youtube.com/watch?v=7ZvpXA_mFpQ',
   'Strict Barbell Curls + Rope Pushdowns': 'https://www.youtube.com/watch?v=LzwgB15UdO8',
+  'Ab Wheel Rollouts': 'https://www.youtube.com/watch?v=rqiTPl9SZnU',
   'Barbell Romanian Deadlift': 'https://www.youtube.com/watch?v=7ADxnAcNjho',
   'Incline Bench Press': 'https://www.youtube.com/watch?v=uIzbJX5EVIY',
-  'Seated Cable Rows': 'https://www.youtube.com/watch?v=GZbfZ033f74'
+  'Seated Cable Rows': 'https://www.youtube.com/watch?v=GZbfZ033f74',
+  'Barbell Hip Thrusts': 'https://www.youtube.com/watch?v=lAnqN0J_p5A',
+  'Seated Calf Raises': 'https://www.youtube.com/watch?v=Yh5TXz99xwY'
 };
 
 var warmupVideoMap = {
