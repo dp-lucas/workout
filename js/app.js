@@ -138,6 +138,10 @@ document.querySelectorAll('.warmup').forEach(function(warmup) {
   warmup.addEventListener('click', function() { warmup.classList.toggle('expanded'); });
 });
 
+// ── Touch: use passive listeners for scroll/touch performance ──
+document.addEventListener('touchstart', function(){}, { passive: true });
+document.addEventListener('touchmove', function(){}, { passive: true });
+
 // ── Service Worker (network-only, enables PWA install without caching) ──
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
