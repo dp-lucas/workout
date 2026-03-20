@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Workout">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="css/styles.css">
+<title>Workout</title>
+</head>
+<body>
+<div class="wrap">
+  <h1>WORKOUT</h1>
+  <p class="sub">Hybrid Running Athlete</p>
+
+  <div class="tabs">
+    <button class="tab active-a" id="tab-a" onclick="show('a')">DAY A</button>
+    <button class="tab" id="tab-b" onclick="show('b')">DAY B</button>
+    <button class="tab" id="tab-r" onclick="show('r')">RUN</button>
+  </div>
+
+  <div id="content">
+
+    <!-- DAY A -->
+    <div class="panel active" id="panel-a">
+      <div class="day-header">
+        <h2 class="color-a">DAY A: Squat + Pull-Up</h2>
+        <p>Focus: Quad-Dominant Legs, Vertical Pull · Core + Prehab</p>
+        <div class="session-meta">
+          <span class="sm-tag"><strong>5</strong> exercises</span>
+          <span class="sm-tag"><strong>15</strong> working sets</span>
+          <span class="sm-tag">~<strong>40</strong> min total</span>
+        </div>
+        <div class="warmup"><span style="color:var(--tint-red)">MOBILITY (~5 min): </span>World's Greatest Stretch: 1 × 5/side, Tempo: 2-3s each position (hips + thoracic for squats) — 90/90 Hip Switches: 2 × 5/side, Tempo: 2-1-2-1 (hip rotation for squat depth) — Ankle Rockers: 2 × 8/side, Tempo: 2-1-2-1 (ankle dorsiflexion for squat depth and calf work) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:var(--tint-red)">WARM-UP: </span>Bodyweight Squats: 2 × 10, Tempo: 2-0-1-0 (quad activation before back squats) + Band Pull-Aparts: 2 × 15, Tempo: 1-0-1-1 (shoulder prep for pull-ups) (Rest: 30s between sets)</div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">01</span><div><div class="ex-slot">Core (Hip Flexors)</div><div class="ex-name">Hanging Leg Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10–12</span><span class="tag tag-meta">Tempo: 2-0-1-1</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Dead hang, posterior pelvic tilt first, then raise legs. Control the descent — no swinging. Straight legs if possible, bent knees to scale down. The hang itself decompresses the spine. Hip flexor strength directly powers your running knee drive. 2s lowering legs | 1s raising legs | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">02</span><div><div class="ex-slot">Quad-Dominant Compound</div><div class="ex-name">Back Squat</div></div></div><div class="ex-tags"><span class="tag tag-sets">4 × 5</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Feet shoulder-width, toes slightly out. Break at hips and knees simultaneously — sit between your legs, not back onto a chair. Aim for parallel or just below. Drive through the whole foot. Brace hard — big breath, tight core, the whole way down and up. Same weight all 4 sets. The king of leg exercises — builds quads, glutes, and core in one movement. Heavy squats improve running economy by training your legs to produce force efficiently. 3s lowering | 1s pause at bottom | 1s driving up | no pause at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">03</span><div><div class="ex-slot">Vertical Pull</div><div class="ex-name">Weighted Pull-Ups</div></div></div><div class="ex-tags"><span class="tag tag-sets">4 × 6–8</span><span class="tag tag-meta">Tempo: 2-1-X-1</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Pronated grip (palms away), slightly wider than shoulders. Drive elbows down to your pockets — initiate with lats, not biceps. Full dead hang at the bottom, chin over bar at the top. No swinging or kipping. Last rep of last set: hold chin over bar for max time (aim 10-20s). Builds the lats and upper back that keep you upright during long runs. 2s lowering | 1s pause at dead hang | explosive pull up | 1s hold at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">04</span><div><div class="ex-slot">Prehab (Adductors)</div><div class="ex-name">Copenhagen Side Planks</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 20–30s/side</span><span class="tag tag-meta">Tempo: Isometric Hold</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Lie on your side, top leg on a bench with inner thigh resting on the edge. Lift your hips and hold — bottom leg hangs or tucks. This loads the hip adductors isometrically in the frontal plane — the plane running hammers hardest. Directly prevents groin strains and knee valgus during running. Scale: bent knee on bench (easier) → straight leg (harder) → bottom leg raised (hardest). Keep hips stacked, don't rotate.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-a">05</span><div><div class="ex-slot">Prehab (Achilles)</div><div class="ex-name">Standing Calf Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 10–12</span><span class="tag tag-meta">Tempo: 2-2-1-2</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Full stretch at the bottom, full squeeze at the top — pause 2s at both ends. Heavy weight, strict form, no bouncing. Standing position loads the gastrocnemius. This is Achilles tendon loading — the #1 injury prevention exercise for runners. Tendinopathy is the most common running injury, and heavy calf raises are the best insurance. 2s lowering heels | 2s pause at stretch | 1s pressing up | 2s squeeze at top.</p></div>
+      </div>
+    </div>
+
+    <!-- DAY B -->
+    <div class="panel" id="panel-b">
+      <div class="day-header">
+        <h2 class="color-b">DAY B: Deadlift + Dip</h2>
+        <p>Focus: Hip-Dominant Legs, Upper Push · Core + Prehab</p>
+        <div class="session-meta">
+          <span class="sm-tag"><strong>5</strong> exercises</span>
+          <span class="sm-tag"><strong>16</strong> working sets</span>
+          <span class="sm-tag">~<strong>40</strong> min total</span>
+        </div>
+        <div class="warmup"><span style="color:var(--tint-blue)">MOBILITY (~5 min): </span>World's Greatest Stretch: 1 × 5/side, Tempo: 2-3s each position (hips + thoracic for deadlift) — Cat-Cow: 2 × 8, Tempo: 3-0-3-0 (spinal segmentation for the hinge pattern) — 90/90 Hip Switches: 2 × 5/side, Tempo: 2-1-2-1 (hip rotation) — Rest: no rest, flow between drills</div>
+        <div class="warmup"><span style="color:var(--tint-blue)">WARM-UP: </span>Glute Bridges: 2 × 10, Tempo: 2-1-1-2 (glute and hamstring activation before deadlifts) + Band Pull-Aparts: 2 × 15, Tempo: 1-0-1-1 (shoulder prep for dips) (Rest: 30s between sets)</div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">01</span><div><div class="ex-slot">Core (Anti-Rotation)</div><div class="ex-name">Pallof Press</div></div></div><div class="ex-tags"><span class="tag tag-sets">2 × 10/side</span><span class="tag tag-meta">Tempo: 1-2-1-0</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Cable at chest height, stand perpendicular to the machine. Press the handle straight out from your chest and hold — resist the rotation. The further you extend your arms, the harder it gets. Keep hips and shoulders square, brace your whole trunk. This trains the anti-rotation your core needs every running stride — your trunk resists rotation thousands of times per run. 1s pressing out | 2s hold at full extension | 1s returning to chest.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">02</span><div><div class="ex-slot">Hip-Dominant Compound</div><div class="ex-name">Barbell Deadlift</div></div></div><div class="ex-tags"><span class="tag tag-sets">4 × 5</span><span class="tag tag-meta">Tempo: 3-1-X-1</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Feet hip-width, bar over mid-foot. Hinge at hips, grip outside knees. Brace hard, push the floor away. Keep the bar in contact with your legs the entire pull. Stand tall at lockout — squeeze glutes, don't hyperextend. Same weight all 4 sets. The deadlift builds the entire posterior chain — hamstrings, glutes, spinal erectors, traps, grip. Strong hamstrings and glutes are your running injury insurance and power your stride. 3s lowering | 1s pause at floor | explosive drive | 1s lockout.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">03</span><div><div class="ex-slot">Upper Push</div><div class="ex-name">Weighted Dips</div></div></div><div class="ex-tags"><span class="tag tag-sets">4 × 6–8</span><span class="tag tag-meta">Tempo: 3-1-1-0</span><span class="tag tag-meta">Rest: 3m</span></div><p class="ex-tip">Lean forward ~30° to hit chest and front delts, or stay upright for more tricep emphasis. Shoulders down and back, elbows track slightly outward. Lower until upper arm is parallel to floor, drive up. Dips are the upper body squat — they hit chest, triceps, and front delts in one compound movement with no wasted volume. 3s lowering | 1s pause at bottom | 1s pressing up | no pause at top.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">04</span><div><div class="ex-slot">Prehab (Shoulders)</div><div class="ex-name">Face Pulls</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 12–15</span><span class="tag tag-meta">Tempo: 2-1-1-2</span><span class="tag tag-meta">Rest: 60s</span></div><p class="ex-tip">Pull towards your eyes. Rotate hands back at the end (double biceps pose). This trains the rear delts and external rotators that counterbalance all the forward-shoulder posture from running and dips. Non-negotiable for shoulder health. 2s letting rope return | 1s pause | 1s pulling to face | 2s squeeze in external rotation.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-b">05</span><div><div class="ex-slot">Prehab (Achilles)</div><div class="ex-name">Standing Calf Raises</div></div></div><div class="ex-tags"><span class="tag tag-sets">3 × 10–12</span><span class="tag tag-meta">Tempo: 2-2-1-2</span><span class="tag tag-meta">Rest: 90s</span></div><p class="ex-tip">Same protocol as Day A. Full stretch, full squeeze, pause at both ends. Heavy and strict. Runners need calf raises on both lifting days — the Achilles tendon absorbs 6-8x bodyweight per stride. Loading it twice a week builds the resilience to handle 180 minutes of running. 2s lowering heels | 2s pause at stretch | 1s pressing up | 2s squeeze at top.</p></div>
+      </div>
+    </div>
+
+    <!-- RUN DAY -->
+    <div class="panel" id="panel-r">
+      <div class="day-header">
+        <h2 class="color-r">RUN DAY: Walk/Run Intervals</h2>
+        <p>Block 1 — Base Building · Tue / Wed / Fri</p>
+        <div class="session-meta">
+          <span class="sm-tag">Zone <strong>2</strong> effort</span>
+          <span class="sm-tag"><strong>3</strong> runs/week</span>
+          <span class="sm-tag">Mar 17 – Apr 13</span>
+        </div>
+        <div class="rules" style="margin-top:10px">
+          <h3 style="color:var(--tint-orange)">4-Week Progression</h3>
+          <div class="rules-grid">
+            <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">W1</span><p><span>Walk 1:30 / Run 1:00</span> — Tue 35 min · Wed 35 min · Fri 40 min</p></div>
+            <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">W2</span><p><span>Walk 1:15 / Run 1:15</span> — Tue 35 min · Wed 35 min · Fri 40 min</p></div>
+            <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">W3</span><p><span>Walk 1:00 / Run 1:30</span> — Tue 35 min · Wed 35 min · Fri 45 min</p></div>
+            <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">W4</span><p><span>DELOAD — Walk 1:00 / Run 1:30</span> — Tue 25 min · Wed 25 min · Fri 30 min walk only</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="exercises">
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-r">01</span><div><div class="ex-slot">Pre-Run</div><div class="ex-name">Dynamic Warm-Up</div></div></div><div class="ex-tags"><span class="tag tag-sets">~3 min</span><span class="tag tag-meta">Tempo: Controlled</span></div><p class="ex-tip">Leg Swings: 10/side (front-to-back + side-to-side). Walking Lunges: 10 steps. High Knees: 20 steps. Ankle circles: 10/side. Don't static stretch cold muscles — save that for after.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-r">02</span><div><div class="ex-slot">The Session</div><div class="ex-name">Walk/Run Intervals</div></div></div><div class="ex-tags"><span class="tag tag-sets">See weekly progression above</span><span class="tag tag-meta">Friday = "long" session (slightly longer)</span></div><p class="ex-tip">Walk briskly during walk phases — don't stroll. Run at a conversational pace during run phases — you should be able to speak in full sentences. If you can't talk, you're going too fast. Stay tall — don't hunch forward. Land midfoot, not on your heels. The walk/run ratio progresses each week — same easy effort, just more time running. Friday is always the longest session to build endurance gradually. If a week feels hard, repeat it instead of progressing — consistency beats speed.</p></div>
+        <div class="ex-card"><div class="ex-top"><span class="ex-num num-r">03</span><div><div class="ex-slot">Post-Run</div><div class="ex-name">Cooldown Stretches</div></div></div><div class="ex-tags"><span class="tag tag-sets">~5 min</span><span class="tag tag-meta">Tempo: Static Holds, 30s each</span></div><p class="ex-tip">Standing Quad Stretch: 30s/side. Standing Calf Stretch (straight leg for gastroc, bent knee for soleus): 30s each/side. Kneeling Hip Flexor Stretch: 30s/side — same as your APT correction stretch, doubles as recovery. Hamstring doorway stretch or standing toe touch: 30s.</p></div>
+      </div>
+
+      <div class="rules" style="margin-top:14px">
+        <h3 style="color:var(--tint-orange)">Phase 1 — Build the Base (You Are Here · Block 1 of ~3)</h3>
+        <div class="rules-grid">
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">1.</span><p><span>Block 1 (now): </span>Walk 1:30 / Run 1:00 → progressing to Walk 1:00 / Run 1:30 by Week 3. Deload Week 4.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">2.</span><p><span>Block 2 (next): </span>Walk 0:45 / Run 2:00 → Walk 0:30 / Run 2:30. Introduce Friday as a dedicated longer session.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">3.</span><p><span>Block 3: </span>Walk 0:30 / Run 3:00 → continuous running. Friday long run reaches 30+ min nonstop.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">4.</span><p><span>Phase 1 complete when: </span>You can run 30 min continuously at a conversational pace with no walk breaks.</p></div>
+        </div>
+      </div>
+      <div class="rules" style="margin-top:10px">
+        <h3 style="color:var(--tint-orange)">Phase 2 — Build Mileage (3 Runs/Week)</h3>
+        <div class="rules-grid">
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">5.</span><p><span>Structure: </span>Tue = easy run (30 min) — Wed = easy run (30 min) — Fri = long run (start at 40 min, add 5 min every 2 weeks)</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">6.</span><p><span>All runs are easy: </span>Zone 2, conversational pace. The long run is longer, not faster. Speed comes later — aerobic base comes first.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">7.</span><p><span>10% rule: </span>Never increase total weekly running time by more than 10% per week. Tendons and bones adapt slower than your lungs.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">8.</span><p><span>Phase 2 complete when: </span>Your long run reaches 75–80 min continuously (~8–9 km at easy pace)</p></div>
+        </div>
+      </div>
+      <div class="rules" style="margin-top:10px">
+        <h3 style="color:var(--tint-orange)">Phase 3 — Half Marathon Ready</h3>
+        <div class="rules-grid">
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">9.</span><p><span>Structure: </span>Tue = easy run (30–40 min) — Wed = easy run (30–40 min) — Fri = long run (build to 100–110 min)</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">10.</span><p><span>Peak long run: </span>Once you can run 100–110 min continuously (roughly 16–18 km at easy pace), you are half marathon ready. You don't need to run 21 km in training.</p></div>
+          <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">11.</span><p><span>Race week: </span>Cut all running volume in half the week before race day. Lift normally. Rest Friday and Saturday. Race Sunday.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rules" style="margin-top:14px">
+    <h3 style="color:var(--label-tertiary)">Cooldown (Every Lifting Session)</h3>
+    <div class="cooldown-inner">
+      <div class="cooldown-header"><span class="cooldown-name">Dead Hangs</span><span class="tag tag-sets">2–3 × 30–45s</span><span class="tag tag-meta">Rest: 60s</span></div>
+      <p class="cooldown-desc">Decompress the spine after every session. Relax everything — shoulders, lats, hips. Grip work is a bonus.</p>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules">
+    <h3 style="color:var(--tint-red)">Block 1 — Lifting Protocol (Weeks 1–4)</h3>
+    <div class="rules-grid">
+      <div class="rule"><span class="rule-num" style="color:var(--tint-red)">1.</span><p><span>Weeks 1–3 — Progressive Overload: </span>When you hit the top of the rep range on ALL sets of an exercise, add weight next session (2.5 kg upper, 5 kg lower). If you miss reps, stay at the same weight.</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-red)">2.</span><p><span>Week 4 — Deload: </span>Same exercises, same weight. Cut sets in half — 4→2, 3→2, 2→1. Keep intensity, slash volume. You will come back stronger. Run deload matches (see Run tab).</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-red)">3.</span><p><span>Priority This Block: </span>Running is the priority. Lifting supports running performance and prevents injury. If a lift makes you too sore to run the next day, reduce lifting weight by 10% until recovery catches up.</p></div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <h3>The Hybrid Running Athlete Rules</h3>
+    <div class="rules-grid">
+      <div class="rule"><span class="rule-num">1.</span><p><span>Run First, Lift to Support: </span>Lifting exists to make you a stronger, more injury-proof runner. Every exercise in this program directly serves your running or prevents a running injury.</p></div>
+      <div class="rule"><span class="rule-num">2.</span><p><span>4 Compounds, Nothing Else: </span>Squat, Deadlift, Pull-Up, Dip. These build total-body strength with minimum fatigue. Everything else is core and prehab — no isolation, no fluff.</p></div>
+      <div class="rule"><span class="rule-num">3.</span><p><span>Run Easy: </span>All running is Zone 2 — conversational pace. The aerobic base builds the engine. Never race your easy runs.</p></div>
+      <div class="rule"><span class="rule-num">4.</span><p><span>Two Rest Days: </span>Saturday and Sunday are non-negotiable rest. Sleep 8–9+ hours — concurrent training demands more recovery than either alone.</p></div>
+      <div class="rule"><span class="rule-num">5.</span><p><span>Fuel the Machine: </span>Protein 1.8–2.2 g/kg/day across 4+ meals. Don't skip carbs — glycogen depletion worsens the interference effect. Eat at maintenance or a slight surplus.</p></div>
+      <div class="rule"><span class="rule-num">6.</span><p><span>Tempo Key: </span>Eccentric – Pause Bottom – Concentric – Pause Top (e.g., 3-1-1-0). X = Explosive.</p></div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <h3>Weekly Schedule</h3>
+    <div class="rules-grid">
+      <div class="rule"><span class="rule-num" style="color:var(--tint-red)">Mon</span><p><span>Lift A</span> — Squat + Pull-Up + Core + Prehab</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">Tue</span><p><span>Run</span> — Easy / Walk-Run Intervals</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">Wed</span><p><span>Run</span> — Easy / Walk-Run Intervals</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-blue)">Thu</span><p><span>Lift B</span> — Deadlift + Dip + Core + Prehab</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--tint-orange)">Fri</span><p><span>Run</span> — Long Session (longest of the week)</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--label-tertiary)">Sat</span><p><span>Rest</span> — Full recovery</p></div>
+      <div class="rule"><span class="rule-num" style="color:var(--label-tertiary)">Sun</span><p><span>Rest</span> — Full recovery</p></div>
+    </div>
+  </div>
+
+  <div class="rules" style="margin-top:14px">
+    <h3 style="color:var(--label-tertiary)">Weight Log Data</h3>
+    <div class="data-actions">
+      <button class="data-btn" onclick="exportWeights()">Export JSON</button>
+      <button class="data-btn" onclick="document.getElementById('import-file').click()">Import JSON</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importWeights(this)">
+    </div>
+  </div>
+
+  <p class="footer">2 Lifting Days + 3 Running Days + 2 Rest Days</p>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

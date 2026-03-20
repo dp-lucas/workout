@@ -1,5 +1,8 @@
-// ── Panel Navigation ──
-var panels = ['a','b','c','r'];
+// ── Panel Navigation (auto-detect available panels) ──
+var panels = [];
+['a','b','c','r'].forEach(function(p) {
+  if (document.getElementById('panel-' + p)) panels.push(p);
+});
 
 function show(id) {
   panels.forEach(function(p) {
