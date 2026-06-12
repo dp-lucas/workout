@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDT — Gym Card</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f0f0f;
+    color: #f0f0f0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: #1a1a1a;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  /* ── RULES STRIP ── */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .rule-item {
+    background: #242424;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .rule-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .rule-value {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .rule-sub {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+    line-height: 1.3;
+  }
+
+  /* ── DAY CARDS ── */
+  .day-a { border-left: 4px solid #4f9eff; }
+  .day-b { border-left: 4px solid #ff6b4f; }
+  .day-m { border-left: 4px solid #4ecb71; }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .day-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .badge-a { background: #1a3a5c; color: #4f9eff; }
+  .badge-b { background: #3d1f18; color: #ff6b4f; }
+  .badge-m { background: #1c2e1c; color: #4ecb71; }
+
+  .day-title {
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .day-subtitle {
+    font-size: 11px;
+    color: #666;
+    margin-top: 1px;
+  }
+
+  /* ── EXERCISE ROWS ── */
+  .exercise-block {
+    margin-bottom: 10px;
+  }
+  .ex-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .ex-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #242424;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+  }
+  .ex-num {
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    color: #555;
+    flex-shrink: 0;
+  }
+  .ex-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .ex-note {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+  }
+  .ex-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .tag-pr-a { background: #1a3a5c; color: #4f9eff; }
+  .tag-pr-b { background: #3d1f18; color: #ff6b4f; }
+  .tag-fix { background: #222; color: #666; }
+  .tag-mob { background: #1c2e1c; color: #4ecb71; }
+
+  .alternate-note {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    font-size: 11px;
+    color: #888;
+    line-height: 1.5;
+  }
+  .alternate-note span { color: #f0f0f0; font-weight: 600; }
+
+  /* ── TIMER RING ── */
+  .timer-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 14px 0 6px;
+  }
+  .timer-circle {
+    text-align: center;
+  }
+  .timer-num {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .timer-unit {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 2px;
+  }
+  .timer-divider {
+    font-size: 28px;
+    color: #333;
+    font-weight: 100;
+  }
+
+  /* ── REPS CADENCE ── */
+  .cadence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0 4px;
+    flex-wrap: wrap;
+  }
+  .cadence-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cadence-num {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .cadence-label {
+    font-size: 8px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .cadence-arrow {
+    font-size: 14px;
+    color: #333;
+    margin-top: -8px;
+  }
+  .cadence-step.fresh .cadence-num { color: #4f9eff; }
+  .cadence-step.mid .cadence-num   { color: #f0f0f0; }
+  .cadence-step.tired .cadence-num { color: #ff6b4f; }
+
+  /* ── REST SIGNALS ── */
+  .signal-list { display: flex; flex-direction: column; gap: 8px; }
+  .signal-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #242424;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .signal-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .signal-text { font-size: 13px; font-weight: 600; line-height: 1.4; }
+  .signal-sub  { font-size: 11px; color: #888; margin-top: 2px; line-height: 1.4; }
+
+  /* ── PROGRESSION ── */
+  .prog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .prog-card {
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .prog-card-20 { background: #1c2e1c; }
+  .prog-card-40 { background: #2e2a10; }
+  .prog-trigger {
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .prog-trigger-20 { color: #4ecb71; }
+  .prog-trigger-40 { color: #f0c040; }
+  .prog-action {
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .prog-sub {
+    font-size: 10px;
+    color: #888;
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  /* ── MONTH SCHEDULE ── */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 44px repeat(3, 1fr);
+    gap: 4px;
+    font-size: 11px;
+  }
+  .sch-header {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    padding: 4px 0;
+  }
+  .sch-week {
+    font-size: 9px;
+    font-weight: 700;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sch-cell {
+    border-radius: 8px;
+    padding: 6px 4px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .sch-a { background: #1a3a5c; color: #4f9eff; }
+  .sch-b { background: #3d1f18; color: #ff6b4f; }
+  .sch-cell .sch-sub { font-size: 9px; font-weight: 500; opacity: 0.8; }
+
+  /* ── DELOAD ── */
+  .deload-bar {
+    background: #242424;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .deload-icon { font-size: 22px; }
+  .deload-text { font-size: 13px; font-weight: 600; line-height: 1.4; }
+  .deload-sub  { font-size: 11px; color: #888; margin-top: 2px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: #222;
+    margin: 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Escalating Density Training</h1>
+  <h2>Minimalist · Full-Body · 3×/Week</h2>
+</div>
+
+<!-- CORE RULES -->
+<div class="card">
+  <div class="card-title">Core Rules</div>
+  <div class="rules-grid">
+
+    <div class="rule-item">
+      <div class="rule-label">Load</div>
+      <div class="rule-value">10RM</div>
+      <div class="rule-sub">Weight you could do 10× to failure — never approach failure</div>
+    </div>
+
+    <div class="rule-item">
+      <div class="rule-label">PR Zone</div>
+      <div class="rule-value">15 min</div>
+      <div class="rule-sub">Alternate A1 ↔ A2 until timer ends</div>
+    </div>
+
+    <div class="rule-item">
+      <div class="rule-label">Starting Reps</div>
+      <div class="rule-value">5 reps</div>
+      <div class="rule-sub">Can start at 6–7 if weight feels light early on</div>
+    </div>
+
+    <div class="rule-item">
+      <div class="rule-label">Failure</div>
+      <div class="rule-value">Never</div>
+      <div class="rule-sub">Stop the set before form breaks down</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- REP CADENCE -->
+<div class="card">
+  <div class="card-title">Rep Cadence Within the Block</div>
+  <div class="cadence">
+    <div class="cadence-step fresh">
+      <div class="cadence-num">6–7</div>
+      <div class="cadence-label">Fresh</div>
+    </div>
+    <div class="cadence-arrow">→</div>
+    <div class="cadence-step fresh">
+      <div class="cadence-num">5</div>
+      <div class="cadence-label">Default</div>
+    </div>
+    <div class="cadence-arrow">→</div>
+    <div class="cadence-step mid">
+      <div class="cadence-num">4</div>
+      <div class="cadence-label">Tired</div>
+    </div>
+    <div class="cadence-arrow">→</div>
+    <div class="cadence-step mid">
+      <div class="cadence-num">3</div>
+      <div class="cadence-label"></div>
+    </div>
+    <div class="cadence-arrow">→</div>
+    <div class="cadence-step tired">
+      <div class="cadence-num">2</div>
+      <div class="cadence-label"></div>
+    </div>
+    <div class="cadence-arrow">→</div>
+    <div class="cadence-step tired">
+      <div class="cadence-num">1</div>
+      <div class="cadence-label">Grind</div>
+    </div>
+  </div>
+  <div style="font-size:11px; color:#555; text-align:center; margin-top:8px;">Reduce naturally as fatigue builds — this is expected and correct</div>
+</div>
+
+<!-- REST SIGNALS -->
+<div class="card">
+  <div class="card-title">When to Transition — 3 Signals</div>
+  <div class="signal-list">
+
+    <div class="signal-row">
+      <div class="signal-icon">👃</div>
+      <div>
+        <div class="signal-text">Breathing test</div>
+        <div class="signal-sub">Can you take one full breath through the nose and brace? Yes → go. Still gasping → wait.</div>
+      </div>
+    </div>
+
+    <div class="signal-row">
+      <div class="signal-icon">💪</div>
+      <div>
+        <div class="signal-text">Bracing test</div>
+        <div class="signal-sub">Before squatting or pulling: take a breath, create pressure, brace. Feels solid → go. Feels weak → wait 10 sec.</div>
+      </div>
+    </div>
+
+    <div class="signal-row">
+      <div class="signal-icon">🎯</div>
+      <div>
+        <div class="signal-text">Quality check</div>
+        <div class="signal-sub">"Can I do 5 clean reps right now?" Honest yes → go. Honest no → wait 10–15 sec and ask again.</div>
+      </div>
+    </div>
+
+  </div>
+  <div style="display:flex; justify-content:space-between; margin-top:10px; padding: 0 4px;">
+    <div style="text-align:center">
+      <div style="font-size:18px; font-weight:800; color:#4f9eff;">15–25s</div>
+      <div style="font-size:9px; color:#555; letter-spacing:1px; text-transform:uppercase;">Min 0–5</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:18px; font-weight:800;">30–45s</div>
+      <div style="font-size:9px; color:#555; letter-spacing:1px; text-transform:uppercase;">Min 5–10</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:18px; font-weight:800; color:#ff6b4f;">45–90s</div>
+      <div style="font-size:9px; color:#555; letter-spacing:1px; text-transform:uppercase;">Min 10–15</div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILITY PREP -->
+<div class="card day-m">
+  <div class="day-header">
+    <div class="day-badge badge-m">M</div>
+    <div>
+      <div class="day-title">KR Mobility Prep</div>
+      <div class="day-subtitle">7 min · before every session · day-specific</div>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-label">Day A — Squat + Pull Days</div>
+
+    <div class="ex-row">
+      <div class="ex-num">1</div>
+      <div style="flex:1">
+        <div class="ex-name">Cat-Cow + Hip Opener</div>
+        <div class="ex-note">Tabletop · flow flexion/extension · open one hip each rep</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">2</div>
+      <div style="flex:1">
+        <div class="ex-name">World's Greatest Stretch</div>
+        <div class="ex-note">High plank · foot to hand · elbow down · reach up</div>
+      </div>
+      <div class="ex-tag tag-mob">45s/side</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">3</div>
+      <div style="flex:1">
+        <div class="ex-name">Deep Cossack Squats</div>
+        <div class="ex-note">Wide stance · shift side to side · straight leg toes up</div>
+      </div>
+      <div class="ex-tag tag-mob">60s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">4</div>
+      <div style="flex:1">
+        <div class="ex-name">Quadruped T-Spine Rotations</div>
+        <div class="ex-note">All fours · hand behind head · rotate down then open up</div>
+      </div>
+      <div class="ex-tag tag-mob">60s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">5</div>
+      <div style="flex:1">
+        <div class="ex-name">Scapular Pull-Up Activation</div>
+        <div class="ex-note">Hang · depress & retract scaps · no elbow bend</div>
+      </div>
+      <div class="ex-tag tag-mob">30s</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="exercise-block" style="margin-bottom:0">
+    <div class="ex-label">Day B — RDL + Push Days</div>
+
+    <div class="ex-row">
+      <div class="ex-num">1</div>
+      <div style="flex:1">
+        <div class="ex-name">90/90 Hip Switches + Rotation</div>
+        <div class="ex-note">Seated · windshield-wiper knees · rotate toward front shin</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">2</div>
+      <div style="flex:1">
+        <div class="ex-name">Dynamic Pigeon</div>
+        <div class="ex-note">High plank · leg up & back · knee forward · lower torso</div>
+      </div>
+      <div class="ex-tag tag-mob">45s/side</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">3</div>
+      <div style="flex:1">
+        <div class="ex-name">Table Top Bridge</div>
+        <div class="ex-note">Palms behind · drive hips up · squeeze glutes · gaze forward</div>
+      </div>
+      <div class="ex-tag tag-mob">60s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">4</div>
+      <div style="flex:1">
+        <div class="ex-name">Bow Reaches</div>
+        <div class="ex-note">Side-lying · top arm arcs over & behind · opens chest & lats</div>
+      </div>
+      <div class="ex-tag tag-mob">60s</div>
+    </div>
+
+    <div class="ex-row" style="margin-bottom:0">
+      <div class="ex-num">5</div>
+      <div style="flex:1">
+        <div class="ex-name">Push-Up + Downward Dog</div>
+        <div class="ex-note">Push-up · press back to downward dog · heels down · flow</div>
+      </div>
+      <div class="ex-tag tag-mob">30s</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY A -->
+<div class="card day-a">
+  <div class="day-header">
+    <div class="day-badge badge-a">A</div>
+    <div>
+      <div class="day-title">Squat + Pull</div>
+      <div class="day-subtitle">Squat rack, slant board & pull-up bar — same station</div>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-label">15-Min PR Zone</div>
+
+    <div class="ex-row">
+      <div class="ex-num">A1</div>
+      <div style="flex:1">
+        <div class="ex-name">Front Squat (slant)</div>
+        <div class="ex-note">Elbows high · bar secure · control descent · drive up · no crashing</div>
+      </div>
+      <div class="ex-tag tag-pr-a">PR Zone</div>
+    </div>
+
+    <div class="alternate-note">
+      A2 alternates each Day A session:<br>
+      <span>Session 1, 3, 5 → Pull-Ups</span> &nbsp;·&nbsp; <span>Session 2, 4, 6 → Ring Rows</span>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">A2</div>
+      <div style="flex:1">
+        <div class="ex-name">Pull-Ups</div>
+        <div class="ex-note">Pull fast · lower under control</div>
+      </div>
+      <div class="ex-tag tag-pr-a">PR Zone</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">A2</div>
+      <div style="flex:1">
+        <div class="ex-name">Ring Rows</div>
+        <div class="ex-note">Pull to chest · scapular squeeze at top · rigid plank</div>
+      </div>
+      <div class="ex-tag tag-pr-a">PR Zone</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="exercise-block" style="margin-bottom:0">
+    <div class="ex-label">Accessory</div>
+    <div class="ex-row">
+      <div class="ex-num">C1</div>
+      <div style="flex:1">
+        <div class="ex-name">Standing Calf Raises</div>
+        <div class="ex-note">Full stretch at bottom · full contraction at top</div>
+      </div>
+      <div class="ex-tag tag-fix">2 × 8–12</div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num">D1</div>
+      <div style="flex:1">
+        <div class="ex-name">Hanging Leg Raises</div>
+        <div class="ex-note">Controlled movement · no momentum</div>
+      </div>
+      <div class="ex-tag tag-fix">2 × 8–12</div>
+    </div>
+    <div class="ex-row" style="margin-bottom:0">
+      <div class="ex-num">D2</div>
+      <div style="flex:1">
+        <div class="ex-name">Hollow Body Rocks</div>
+        <div class="ex-note">Lower back pressed to floor · arms behind head · feet 2" up · rock</div>
+      </div>
+      <div class="ex-tag tag-fix">1 × 60–90s</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY B -->
+<div class="card day-b">
+  <div class="day-header">
+    <div class="day-badge badge-b">B</div>
+    <div>
+      <div class="day-title">RDL + Push</div>
+      <div class="day-subtitle">Deadlift platform & dip bars — same station</div>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-label">15-Min PR Zone</div>
+
+    <div class="ex-row">
+      <div class="ex-num">A1</div>
+      <div style="flex:1">
+        <div class="ex-name">Romanian Deadlift</div>
+        <div class="ex-note">Soft knees · bar drags legs · stop at hamstring stretch · no floor chasing</div>
+      </div>
+      <div class="ex-tag tag-pr-b">PR Zone</div>
+    </div>
+
+    <div class="alternate-note">
+      A2 alternates each Day B session:<br>
+      <span>Session 1, 3, 5 → Dips</span> &nbsp;·&nbsp; <span>Session 2, 4, 6 → Push-Ups</span>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">A2</div>
+      <div style="flex:1">
+        <div class="ex-name">Dips</div>
+        <div class="ex-note">Lower under control · drive up with intent · stop at parallel if shoulders sensitive</div>
+      </div>
+      <div class="ex-tag tag-pr-b">PR Zone</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">A2</div>
+      <div style="flex:1">
+        <div class="ex-name">Push-Ups</div>
+        <div class="ex-note">Rigid plank throughout · lower under control · press up fast</div>
+      </div>
+      <div class="ex-tag tag-pr-b">PR Zone</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="exercise-block" style="margin-bottom:0">
+    <div class="ex-label">Accessory</div>
+    <div class="ex-row">
+      <div class="ex-num">C1</div>
+      <div style="flex:1">
+        <div class="ex-name">Seated Calf Raises</div>
+        <div class="ex-note">Full stretch at bottom · soleus responds most here</div>
+      </div>
+      <div class="ex-tag tag-fix">2 × 8–12</div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num">D1</div>
+      <div style="flex:1">
+        <div class="ex-name">Ab Wheel Rollouts</div>
+        <div class="ex-note">Core stays firing · shorten range if position breaks</div>
+      </div>
+      <div class="ex-tag tag-fix">2 × 6–10</div>
+    </div>
+    <div class="ex-row" style="margin-bottom:0">
+      <div class="ex-num">D2</div>
+      <div style="flex:1">
+        <div class="ex-name">Starfish</div>
+        <div class="ex-note">X position · opposite arm meets opposite leg · low back planted</div>
+      </div>
+      <div class="ex-tag tag-fix">1 × 30s</div>
+    </div>
+  </div>
+</div>
+
+<!-- COOLDOWN -->
+<div class="card day-m">
+  <div class="day-header">
+    <div class="day-badge badge-m">M</div>
+    <div>
+      <div class="day-title">KR Cooldown</div>
+      <div class="day-subtitle">3–4 min · after every session · day-specific</div>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-label">Day A — After Squat + Pull</div>
+    <div class="ex-row">
+      <div class="ex-num">1</div>
+      <div style="flex:1">
+        <div class="ex-name">Couch Stretch</div>
+        <div class="ex-note">Rear foot on bench/wall · squeeze rear glute · stay upright</div>
+      </div>
+      <div class="ex-tag tag-mob">45s/side</div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num">2</div>
+      <div style="flex:1">
+        <div class="ex-name">Cat-Cow</div>
+        <div class="ex-note">Slow spinal flexion & extension · decompress</div>
+      </div>
+      <div class="ex-tag tag-mob">45s</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="exercise-block" style="margin-bottom:0">
+    <div class="ex-label">Day B — After RDL + Push</div>
+    <div class="ex-row">
+      <div class="ex-num">1</div>
+      <div style="flex:1">
+        <div class="ex-name">Dynamic Pigeon</div>
+        <div class="ex-note">Hold deeper than prep · static stretch · breathe into it</div>
+      </div>
+      <div class="ex-tag tag-mob">45s/side</div>
+    </div>
+    <div class="ex-row" style="margin-bottom:0">
+      <div class="ex-num">2</div>
+      <div style="flex:1">
+        <div class="ex-name">Table Top Bridge</div>
+        <div class="ex-note">Open chest · decompress shoulders after pushing</div>
+      </div>
+      <div class="ex-tag tag-mob">45s</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESSION -->
+<div class="card">
+  <div class="card-title">Progression — Track Total Reps Per Zone</div>
+  <div class="prog-grid">
+    <div class="prog-card prog-card-20">
+      <div class="prog-trigger prog-trigger-20">+20%</div>
+      <div class="prog-action">Add 5% load</div>
+      <div class="prog-sub">Reset rep count. Build again.</div>
+    </div>
+    <div class="prog-card prog-card-40">
+      <div class="prog-trigger prog-trigger-40">+40%</div>
+      <div class="prog-action">Add 10% load</div>
+      <div class="prog-sub">Breakthrough session. Reward it.</div>
+    </div>
+  </div>
+  <div style="background:#1e1e1e; border-radius:10px; padding:10px 12px; margin-top:8px; font-size:12px; color:#888; line-height:1.5;">
+    Log two numbers after every session: <strong style="color:#f0f0f0;">A1 reps / A2 reps</strong><br>
+    e.g. <em>Day A — Front squat 48 / Pull-Up 27</em>
+  </div>
+</div>
+
+<!-- MONTH SCHEDULE -->
+<div class="card">
+  <div class="card-title">4-Week Schedule · Mon / Wed / Fri</div>
+  <div class="schedule-grid">
+    <div class="sch-header"></div>
+    <div class="sch-header">MON</div>
+    <div class="sch-header">WED</div>
+    <div class="sch-header">FRI</div>
+
+    <div class="sch-week">W1</div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Pull-Ups</div></div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Dips</div></div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Ring Rows</div></div>
+
+    <div class="sch-week">W2</div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Push-Ups</div></div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Pull-Ups</div></div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Dips</div></div>
+
+    <div class="sch-week">W3</div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Ring Rows</div></div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Push-Ups</div></div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Pull-Ups</div></div>
+
+    <div class="sch-week">W4</div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Dips</div></div>
+    <div class="sch-cell sch-a">A<div class="sch-sub">Ring Rows</div></div>
+    <div class="sch-cell sch-b">B<div class="sch-sub">Push-Ups</div></div>
+  </div>
+</div>
+
+<!-- DELOAD -->
+<div class="card">
+  <div class="card-title">Deload — Every 6–8 Weeks</div>
+  <div class="deload-bar">
+    <div class="deload-icon">🔋</div>
+    <div>
+      <div class="deload-text">Drop PR Zone to <strong>10 minutes</strong></div>
+      <div class="deload-sub">Same load · no rep chasing · movement quality only · one week</div>
+    </div>
+  </div>
+</div>
+
+<!-- OFF-DAY MOBILITY -->
+<div class="card day-m">
+  <div class="day-header">
+    <div class="day-badge badge-m">R</div>
+    <div>
+      <div class="day-title">Off-Day Mobility</div>
+      <div class="day-subtitle">10 min · Tue / Thu / Sat / optional Sun</div>
+    </div>
+  </div>
+
+  <div class="exercise-block" style="margin-bottom:0">
+    <div class="ex-label">KR 10-Minute Morning Mobility</div>
+
+    <div class="ex-row">
+      <div class="ex-num">1</div>
+      <div style="flex:1">
+        <div class="ex-name">90/90 Hip Switches + Rotation</div>
+        <div class="ex-note">Windshield-wiper knees · rotate toward front shin</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">2</div>
+      <div style="flex:1">
+        <div class="ex-name">Low Lunge + Openers</div>
+        <div class="ex-note">Deep lunge · open torso toward front knee · alternate sides</div>
+      </div>
+      <div class="ex-tag tag-mob">2 min</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">3</div>
+      <div style="flex:1">
+        <div class="ex-name">Bow Reaches</div>
+        <div class="ex-note">Side-lying · top arm arcs over & behind · opens chest & lats</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">4</div>
+      <div style="flex:1">
+        <div class="ex-name">Quadruped T-Spine Rotations</div>
+        <div class="ex-note">All fours · hand behind head · rotate down then open up</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row">
+      <div class="ex-num">5</div>
+      <div style="flex:1">
+        <div class="ex-name">Alternating QL Rocks</div>
+        <div class="ex-note">Side-lying · rock hips gently · release lower back tension</div>
+      </div>
+      <div class="ex-tag tag-mob">90s</div>
+    </div>
+
+    <div class="ex-row" style="margin-bottom:0">
+      <div class="ex-num">6</div>
+      <div style="flex:1">
+        <div class="ex-name">Cat-Cow + Hip Opener</div>
+        <div class="ex-note">Tabletop · flow flexion/extension · open one hip each rep</div>
+      </div>
+      <div class="ex-tag tag-mob">2 min</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
