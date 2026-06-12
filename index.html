@@ -469,6 +469,76 @@
   }
   .hand-rec strong { color: #f0f0f0; }
 
+  /* ── SESSION WALKTHROUGH ── */
+  .walk-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
+  }
+  .walk-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .walk-step:first-child { padding-top: 0; }
+  .walk-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #242424;
+    color: #555;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .walk-num.active { background: #3d1f18; color: #ff6b4f; }
+  .walk-body { flex: 1; }
+  .walk-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .walk-duration {
+    font-size: 10px;
+    font-weight: 700;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .walk-detail {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+    margin-top: 3px;
+  }
+  .walk-detail strong { color: #ccc; }
+
+  /* ── SIGNALS INTRO ── */
+  .signal-intro {
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+  }
+  .signal-intro strong { color: #f0f0f0; }
+  .signal-all-green {
+    background: #1c2e1c;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4ecb71;
+    line-height: 1.5;
+  }
+  .signal-all-green span { color: #a8e6b8; font-weight: 400; }
+
   /* ── DIVIDER ── */
   .divider {
     height: 1px;
@@ -483,6 +553,103 @@
 <div class="header">
   <h1>Escalating Density Training</h1>
   <h2>Minimalist · Full-Body · 3×/Week</h2>
+</div>
+
+<!-- SESSION WALKTHROUGH -->
+<div class="card">
+  <div class="card-title">Door to Door — Full Session</div>
+
+  <div class="walk-step">
+    <div class="walk-num">1</div>
+    <div class="walk-body">
+      <div class="walk-duration">~2 min</div>
+      <div class="walk-title">Arrive — Set up first</div>
+      <div class="walk-detail">
+        Don't start moving yet. Find everything before you begin.<br>
+        <strong>Day B:</strong> working weight dumbbells + one lighter pair (~50%) · dip bars or clear floor space · ab wheel + mat · seated calf raise machine or bench.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">2</div>
+    <div class="walk-body">
+      <div class="walk-duration">~7 min</div>
+      <div class="walk-title">KR Mobility Prep</div>
+      <div class="walk-detail">
+        Floor space, no equipment. All dynamic — keep moving for the full duration of each exercise. This is your warm-up. Do not skip it.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">3</div>
+    <div class="walk-body">
+      <div class="walk-duration">~3 min</div>
+      <div class="walk-title">Feeder Sets</div>
+      <div class="walk-detail">
+        Don't start the timer yet.<br>
+        <strong>Day B:</strong> RDL × 5 at 50% → RDL × 3 at 75%. Put the lighter dumbbells aside. If it's a Dips day: 5 slow bodyweight dips. Push-Up day: nothing extra needed.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num active">4</div>
+    <div class="walk-body">
+      <div class="walk-duration">15 min</div>
+      <div class="walk-title">PR Zone — start the timer</div>
+      <div class="walk-detail">
+        Alternate A1 ↔ A2. Cap every set at 5 reps. Transition when all 3 signals are green. The 15-minute clock provides all the pressure you need — don't over-rest, don't rush.<br>
+        <strong>Write down your total A1 + A2 reps when the timer ends.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">5</div>
+    <div class="walk-body">
+      <div class="walk-duration">~4 min</div>
+      <div class="walk-title">Calves</div>
+      <div class="walk-detail">
+        Seated Calf Raises — 2 × 8–12. Full stretch at the bottom. Rest 60–90 sec between sets.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">6</div>
+    <div class="walk-body">
+      <div class="walk-duration">~4 min</div>
+      <div class="walk-title">Core</div>
+      <div class="walk-detail">
+        Ab Wheel Rollouts — 2 × 6–10. Rest 60–90 sec.<br>
+        Starfish — 1 × 30 sec immediately after the last set.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">7</div>
+    <div class="walk-body">
+      <div class="walk-duration">~4 min</div>
+      <div class="walk-title">KR Cooldown</div>
+      <div class="walk-detail">
+        Back to the floor. You're done lifting.<br>
+        Dynamic Pigeon 45 sec/side → Table Top Bridge 45 sec. Longer and deeper than the prep.
+      </div>
+    </div>
+  </div>
+
+  <div class="walk-step">
+    <div class="walk-num">8</div>
+    <div class="walk-body">
+      <div class="walk-duration">~39 min total</div>
+      <div class="walk-title">Leave</div>
+      <div class="walk-detail">That's the session. Under 40 minutes from first movement to walking out.</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- CORE RULES -->
@@ -557,6 +724,11 @@
 <!-- REST SIGNALS -->
 <div class="card">
   <div class="card-title">When to Transition — 3 Signals</div>
+
+  <div class="signal-intro">
+    In normal training you watch a clock — rest 90 seconds, go. <strong>EDT doesn't do that.</strong> The 15-minute timer is the only clock. Between every mini-set you rest however long your body needs — no more, no less. These 3 signals tell you the exact moment you're ready. You don't count seconds. You check the signals and go when they're all green.
+  </div>
+
   <div class="signal-list">
 
     <div class="signal-row">
@@ -584,7 +756,15 @@
     </div>
 
   </div>
-  <div style="display:flex; justify-content:space-between; margin-top:10px; padding: 0 4px;">
+
+  <div class="signal-all-green">
+    All 3 must be yes before you start the next set. <span>One green and two red means you wait. No exceptions.</span>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:12px; padding: 0 4px;">
+    <div style="font-size:9px; color:#555; text-align:center; width:100%; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Natural rest intervals that result</div>
+  </div>
+  <div style="display:flex; justify-content:space-between; padding: 0 4px;">
     <div style="text-align:center">
       <div style="font-size:18px; font-weight:800; color:#4f9eff;">15–25s</div>
       <div style="font-size:9px; color:#555; letter-spacing:1px; text-transform:uppercase;">Min 0–5</div>
