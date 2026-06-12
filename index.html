@@ -407,6 +407,68 @@
     line-height: 1.5;
   }
 
+  /* ── HAND POSITION GUIDE ── */
+  .hand-guide {
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 8px;
+  }
+  .hand-guide-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .hand-positions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+  .hand-pos {
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .hand-pos-chest  { background: #1a3a5c; }
+  .hand-pos-bal    { background: #242424; }
+  .hand-pos-tri    { background: #3d1f18; }
+  .hand-pos-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .hand-pos-chest  .hand-pos-label { color: #4f9eff; }
+  .hand-pos-bal    .hand-pos-label { color: #888; }
+  .hand-pos-tri    .hand-pos-label { color: #ff6b4f; }
+  .hand-pos-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+    letter-spacing: -4px;
+  }
+  .hand-pos-width {
+    font-size: 11px;
+    font-weight: 700;
+    color: #f0f0f0;
+    margin-bottom: 3px;
+  }
+  .hand-pos-elbow {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.3;
+  }
+  .hand-rec {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .hand-rec strong { color: #f0f0f0; }
+
   /* ── DIVIDER ── */
   .divider {
     height: 1px;
@@ -803,6 +865,37 @@
         <div class="ex-note">Rigid plank throughout · lower under control · press up fast</div>
       </div>
       <div class="ex-tag tag-pr-b">PR Zone</div>
+    </div>
+
+    <div class="hand-guide">
+      <div class="hand-guide-title">Push-Up Hand Position</div>
+      <div class="hand-positions">
+
+        <div class="hand-pos hand-pos-chest">
+          <div class="hand-pos-icon">🤲</div>
+          <div class="hand-pos-label">Chest</div>
+          <div class="hand-pos-width">Wide</div>
+          <div class="hand-pos-elbow">Outside shoulder-width · elbows flare 60–75°</div>
+        </div>
+
+        <div class="hand-pos hand-pos-bal">
+          <div class="hand-pos-icon">👐</div>
+          <div class="hand-pos-label">Balanced</div>
+          <div class="hand-pos-width">Shoulder-width</div>
+          <div class="hand-pos-elbow">Elbows at 45° · even chest + triceps</div>
+        </div>
+
+        <div class="hand-pos hand-pos-tri">
+          <div class="hand-pos-icon">🙌</div>
+          <div class="hand-pos-label">Triceps</div>
+          <div class="hand-pos-width">Narrow</div>
+          <div class="hand-pos-elbow">Inside shoulder-width · elbows tight to ribs</div>
+        </div>
+
+      </div>
+      <div class="hand-rec">
+        <strong>Recommendation:</strong> Since Dips already hit triceps heavily on alternating sessions, default to <strong style="color:#4f9eff;">wide grip</strong> on Push-Up days for chest emphasis and better movement balance across the week.
+      </div>
     </div>
   </div>
 
